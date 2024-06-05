@@ -1,8 +1,35 @@
 .. SPDX-FileCopyrightText: 2021 Andrius Štikonas <andrius@stikonas.eu>
 .. SPDX-FileCopyrightText: 2021 Paul Dersey <pdersey@gmail.com>
 .. SPDX-FileCopyrightText: 2021 fosslinux <fosslinux@aussies.space>
+.. SPDX-FileCopyrightText: 2024 Tony Herchenroder 
 
 .. SPDX-License-Identifier: CC-BY-SA-4.0
+
+This fork is an extension of the live-bootstrap project to provide a fully bootstrapped software build environment based on live-bootstrap extended by a LFS (Linux From Scratch) 12 build. The LFS subsystem is not intended to be a full distribution. It has no init system scripts or bootloader. The intent is to provide a dynamically linked build environment that is capable of building packages for other applications. I created this fork as an interim step in my project to bootstrap a Gentoo stage three tarball from source. I thought someone else might find it useful.
+
+The environment is based on some old bash scripts I had made for installing LFS. The scripts were updated to LFS V12 and tweaked to work in the live-bootstrap environment. LFS revision 12 was chosen because it is the last revision of LFS that will work with the Linux kernel used in the live-bootstrap.
+
+Requirements
+
+In addition the the requirements of the live-bootstrap, you will need an additional partition to build the lfs environment in. 32 GB is sufficient for the task.
+
+recommendations and notes.
+
+I would recommend the use of a separate swap partition rather than using the swap system in the live-bootstrap. 8 GB is sufficient for the task. The repo is set up to use the chroot method by default. The defaults should work with the qemu mode and bare metal as is. If using the bubble wrap method, delete the contents of the /steps/after directory prior to running the live-bootstrap. It is also recommended that you download the live-bootstrap and lfs source files locally. I store them on a web server on my local NAS. To use a local repository search for "#local" in the scripts. comment the lines above to disable the remote repository and uncomment and edit the line below to point to the local repository.
+
+How to use:
+
+1. set up the necessary partitions
+2. git clone https://github.com/ajherchenroder/live-bootstrap-with-lfs
+3. git submodule update --init --recursive
+4. run rootfs.py with the desired options
+NOTE: The live-bootstrap will automatically terminate in the interactive mode except when using bubble wrap. In that case please use the interactive option.
+5. swapon the external swap partition (if desired)
+6. cd into /steps/lfs
+7. run ./lfsmain.sh and follow the prompts
+the scripts will end with you chrooted into the lfs partition.
+
+Original live-bootstrap readme follows:
 
 
 live-bootstrap
