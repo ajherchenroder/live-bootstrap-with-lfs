@@ -56,7 +56,7 @@ curl https://ftp.gnu.org/gnu/libunistring/libunistring-1.1.tar.xz -O
 curl https://ftp.gnu.org/gnu/libidn/libidn2-2.3.7.tar.gz -O
 #local
 #curl http://192.168.2.102/LFS/libidn2-2.3.7.tar.gz -O
-curl https://github.com/rockdaboot/libpsl/releases/download/0.21.5/libpsl-0.21.5.tar.gz -O
+curl https://github.com/rockdaboot/libpsl/releases/download/0.21.5/libpsl-0.21.5.tar.gz -O -L
 #local
 #curl http://192.168.2.102/LFS/libpsl-0.21.5.tar.gz -O
 curl https://www.nano-editor.org/dist/v7/nano-7.2.tar.xz -O
@@ -65,10 +65,10 @@ curl https://www.nano-editor.org/dist/v7/nano-7.2.tar.xz -O
 curl https://ftp.gnu.org/gnu/libtasn1/libtasn1-4.19.0.tar.gz -O
 #local
 #curl http://192.168.2.102/LFS/libtasn1-4.19.0.tar.gz -O
-curl https://github.com/p11-glue/p11-kit/releases/download/0.25.0/p11-kit-0.25.0.tar.xz -O
+curl https://github.com/p11-glue/p11-kit/releases/download/0.25.0/p11-kit-0.25.0.tar.xz -O -L
 #local 
 #curl http://192.168.2.102/LFS/p11-kit-0.25.0.tar.xz -O
-curl https://github.com/lfs-book/make-ca/releases/download/v1.12/make-ca-1.12.tar.xz -O
+curl https://github.com/lfs-book/make-ca/releases/download/v1.12/make-ca-1.12.tar.xz -O -L
 #local
 #curl http://192.168.2.102/LFS/make-ca-1.12.tar.xz -O
 curl https://ftp.gnu.org/gnu/wget/wget-1.21.4.tar.gz -O
