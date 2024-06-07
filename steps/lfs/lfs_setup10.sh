@@ -172,7 +172,11 @@ cd /sources
 rm -Rf curl-8.6.0
 #
 ##nano
-tar -xvf nano-7.2.tar.xz
+if test -f nano-7.2.tar.xz; then
+  tar -xvf nano-7.2.tar.xz
+else
+tar -xvf nano-7.2.tar.gz
+fi
 cd nano-7.2
 ./configure --prefix=/usr --sysconfdir=/etc --enable-utf8 --docdir=/usr/share/doc/nano-7.2
 make
