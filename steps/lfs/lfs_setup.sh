@@ -59,7 +59,7 @@ curl https://ftp.gnu.org/gnu/libidn/libidn2-2.3.7.tar.gz -O
 curl https://github.com/rockdaboot/libpsl/releases/download/0.21.5/libpsl-0.21.5.tar.gz -O -L
 #local
 #curl http://192.168.2.102/LFS/libpsl-0.21.5.tar.gz -O
-curl https://www.nano-editor.org/dist/v7/nano-7.2.tar.xz -O
+curl https://www.nano-editor.org/dist/v7/nano-7.2.tar.xz -O -L
 #local
 #curl http://192.168.2.102/LFS/nano-7.2.tar.xz -O
 curl https://ftp.gnu.org/gnu/libtasn1/libtasn1-4.19.0.tar.gz -O
