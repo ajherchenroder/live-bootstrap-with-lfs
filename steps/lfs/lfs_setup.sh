@@ -55,7 +55,7 @@ if test "$REMOTE" = "local"; then
    echo "local"
    curl http://192.168.2.102/LFS/lfs-packages-12.0.tar -O
    tar -xvf lfs-packages-12.0.tar
-   cp $LFS/sources/12.0/* 
+   cp $LFS/sources/12.0/* $LFS/sources/
    curl http://192.168.2.102/LFS/curl-8.6.0.tar.xz -O
    curl http://192.168.2.102/LFS/libunistring-1.1.tar.xz -O
    curl http://192.168.2.102/LFS/libidn2-2.3.7.tar.gz -O
@@ -69,7 +69,7 @@ else
    echo "remote"
    curl https://ftp.osuosl.org/pub/lfs/lfs-packages/lfs-packages-12.0.tar -O
    tar -xvf lfs-packages-12.0.tar
-   cp $LFS/sources/12.0/* 
+   cp $LFS/sources/12.0/* $LFS/sources/
    curl https://curl.se/download/curl-8.6.0.tar.xz -O
    curl https://ftp.gnu.org/gnu/libunistring/libunistring-1.1.tar.xz -O
    curl https://ftp.gnu.org/gnu/libidn/libidn2-2.3.7.tar.gz -O
