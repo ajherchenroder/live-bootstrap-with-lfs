@@ -204,7 +204,8 @@ cat > /etc/profile << "EOF"
 # Append our default paths
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:$PATH"
 export TERM=$TERM PS1='\u:\w\$ '
-
+# add terminal type
+export TERM="xterm"
 EOF
 # inputrc
 cat > /etc/inputrc << "EOF"
@@ -259,6 +260,7 @@ cat > /etc/shells << "EOF"
 
 # End /etc/shells
 EOF
+
 echo "this completes the basic LFS environment build. Please note that it has not been stripped."
 echo "The system is not bootable and is intended as a chrootable x86-64 build environment."
 echo "To make the system into a full LFS install, run chapter 9 and 10 by hand"
