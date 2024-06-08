@@ -65,6 +65,7 @@ if test "$REMOTE" = "local"; then
    curl http://192.168.2.102/LFS/p11-kit-0.25.0.tar.xz -O
    curl http://192.168.2.102/LFS/make-ca-1.12.tar.xz -O
    curl http://192.168.2.102/LFS/wget-1.21.4.tar.gz -O
+   curl http://192.168.2.102/LFS/git-2.41.0.tar.xz -O
 else
    echo "remote"
    curl https://ftp.osuosl.org/pub/lfs/lfs-packages/lfs-packages-12.0.tar -O
@@ -79,6 +80,7 @@ else
    curl https://github.com/p11-glue/p11-kit/releases/download/0.25.0/p11-kit-0.25.0.tar.xz -O -L
    curl https://github.com/lfs-book/make-ca/releases/download/v1.12/make-ca-1.12.tar.xz -O -L
    curl https://ftp.gnu.org/gnu/wget/wget-1.21.4.tar.gz -O
+   curl https://www.kernel.org/pub/software/scm/git/git-2.41.0.tar.xz -O -L
 fi
 
 #to do: add in any additional BLFS packages desired. 

@@ -194,6 +194,16 @@ set regexp
 EOF
 cd /sources
 rm -Rf nano-7.2
+#
+##git
+tar -xvf git-2.41.0.tar.xz
+cd git-2.41.0
+./configure --prefix=/usr --with-gitconfig=/etc/gitconfig --with-python=python3 &&
+make
+make perllibdir=/usr/lib/perl5/5.38/site_perl install
+cd /sources
+rm -Rf git-2.41.0
+cd /sources
 rm -rf /tmp/*
 find /usr/lib /usr/libexec -name \*.la -delete
 find /usr -depth -name $(uname -m)-lfs-linux-gnu\* | xargs rm -rf
@@ -266,5 +276,5 @@ echo "The system is not bootable and is intended as a chrootable x86-64 build en
 echo "To make the system into a full LFS install, run chapter 9 and 10 by hand"
 echo "please note that this environment has both curl and wget for file transfer"
 echo "please exit back to the livebootstrap environment"
-echo "the folowing BLFS packages are installed in this build : Curl, libpsl, libidn2, libunistring, nano, libtasn1, p11-kit, make-ca and wget "
+echo "the folowing BLFS packages are installed in this build : Curl, libpsl, libidn2, libunistring, nano, libtasn1, p11-kit, make-ca, git and wget "
 
