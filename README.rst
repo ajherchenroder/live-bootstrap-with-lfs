@@ -15,7 +15,7 @@ In addition the the requirements of the live-bootstrap, you will need an additio
 
 recommendations and notes.
 
-I would recommend the use of a separate swap partition rather than using the swap system in the live-bootstrap. 8 GB is sufficient for the task. The repo is set up to use the chroot method by default. The defaults should work with the qemu mode and bare metal as is. If using the bubble wrap method, delete the contents of the /steps/after directory prior to running the live-bootstrap. It is also recommended that you download the live-bootstrap and lfs source files locally. I store them on a web server on my local NAS. To use a local repository search for "#local" in the lfs_setup.sh script located in /steps/lfs . modify the links to point to the local repository.
+I would recommend the use of a separate swap partition rather than using the swap system in the live-bootstrap. 8 GB is sufficient for the task. The repo is set up to use the chroot method by default. The defaults should work with the qemu mode and bare metal as is. If using the bubble wrap method, delete the contents of the /steps/after directory prior to running the live-bootstrap. It is also recommended that you download the live-bootstrap and lfs source files locally. I store them on a web server on my local NAS. To use a local repository search for "#local" in the lfs_setup.sh script located in /steps/lfs . modify the links to point to the local repository. I also recommend creating an additional partition. The partition would be used to build any of the follow on distributions that are being worked on.
 
 How to use:
 
