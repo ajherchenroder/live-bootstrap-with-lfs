@@ -63,7 +63,7 @@ if test "$REMOTE" = "local"; then
    curl http://192.168.2.102/LFS/nano-7.2.tar.xz -O
    curl http://192.168.2.102/LFS/libtasn1-4.19.0.tar.gz -O
    curl http://192.168.2.102/LFS/p11-kit-0.25.0.tar.xz -O
-   curl http://192.168.2.102/LFS/make-ca-1.12.tar.xz -O
+   curl http://192.168.2.102/LFS/make-ca-1.13.tar.xz -O
    curl http://192.168.2.102/LFS/wget-1.21.4.tar.gz -O
    curl http://192.168.2.102/LFS/git-2.41.0.tar.xz -O
    curl http://192.168.2.102/LFS/nss-3.92.tar.gz -O
@@ -73,7 +73,7 @@ if test "$REMOTE" = "local"; then
 
 else
    echo "remote"
-   curl https://ftp.osuosl.org/pub/lfs/lfs-packages/lfs-packages-12.0.tar -O
+   curl https://ftp.osu.org/pub/lfs/lfs-packages/lfs-packages-12.0.tar -O
    tar -xvf lfs-packages-12.0.tar
    cp $LFS/sources/12.0/* $LFS/sources/
    curl https://curl.se/download/curl-8.6.0.tar.xz -O
@@ -83,7 +83,7 @@ else
    curl https://mirrors.ocf.berkeley.edu/gnu/nano/nano-7.2.tar.xz -O -L
    curl https://ftp.gnu.org/gnu/libtasn1/libtasn1-4.19.0.tar.gz -O
    curl https://github.com/p11-glue/p11-kit/releases/download/0.25.0/p11-kit-0.25.0.tar.xz -O -L
-   curl https://github.com/lfs-book/make-ca/releases/download/v1.12/make-ca-1.12.tar.xz -O -L
+   curl https://github.com/lfs-book/make-ca/releases/download/v1.13/make-ca-1.13.tar.xz -O -L
    curl https://ftp.gnu.org/gnu/wget/wget-1.21.4.tar.gz -O
    curl https://www.kernel.org/pub/software/scm/git/git-2.41.0.tar.xz -O -L
    curl https://archive.mozilla.org/pub/security/nss/releases/NSS_3_92_RTM/src/nss-3.92.tar.gz -O -L

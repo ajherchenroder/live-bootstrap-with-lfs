@@ -319,4 +319,5 @@ echo "To make the system into a full LFS install, run chapter 9 and 10 by hand"
 echo "please note that this environment has both curl and wget for file transfer"
 echo "please exit back to the livebootstrap environment"
 echo "the folowing BLFS packages are installed in this build : Curl, libpsl, libidn2, libunistring, nano, libtasn1, p11-kit, make-ca, git, NSPR, NSS, sqlite and wget "
+echo "run source /etc/profile to set up your environment."
 
