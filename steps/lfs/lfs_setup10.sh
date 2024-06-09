@@ -1,6 +1,7 @@
 #!/bin/sh
 set -e
 #
+export MAKEFLAGS=-j$(nproc)
 # 
 echo "starting bauild at 8.76"
 #

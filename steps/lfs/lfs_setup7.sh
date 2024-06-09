@@ -2,6 +2,7 @@
 set -e
 #
 # 
+export MAKEFLAGS=-j$(nproc)
 echo "Starting the main event building chapter 8"
 #
 ## man-pages

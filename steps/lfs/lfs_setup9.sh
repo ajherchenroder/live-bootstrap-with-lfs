@@ -1,5 +1,6 @@
 #!/bin/sh
 set -e
+export MAKEFLAGS=-j$(nproc)
 #
 # 
 echo "starting build at 8.51"

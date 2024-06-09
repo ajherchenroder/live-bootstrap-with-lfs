@@ -2,6 +2,8 @@
 set -e
 #
 # 
+export MAKEFLAGS=-j$(nproc)
+
 echo "creating additional tools"
 #
 ## gettext
