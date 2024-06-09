@@ -138,6 +138,47 @@ ln -sfv ./pkcs11/p11-kit-trust.so /usr/lib/libnssckbi.so
 cd /sources
 rm -Rf p11-kit-0.25.0
 #
+##nspr
+tar -xvf nspr-4.35.tar.gz
+cd nspr-4.35
+cd nspr 
+sed -ri '/^RELEASE/s/^/#/' pr/src/misc/Makefile.in
+sed -i 's#$(LIBRARY) ##'   config/rules.mk      
+./configure --prefix=/usr --with-mozilla --with-pthreads $([ $(uname -m) = x86_64 ] && echo --enable-64bit)
+make
+make install
+cd /sources
+rm -Rf nspr-4.35
+#
+##nss
+tar -xvf nss-3.92.tar.gz
+cd nss-3.92
+patch -Np1 -i ../nss-3.92-standalone-1.patch
+cd nss
+make BUILD_OPT=1  NSPR_INCLUDE_DIR=/usr/include/nspr USE_SYSTEM_ZLIB=1 ZLIB_LIBS=-lz NSS_ENABLE_WERROR=0 /
+$([ $(uname -m) = x86_64 ] && echo USE_64=1) $([ -f /usr/include/sqlite3.h ] && echo NSS_USE_SYSTEM_SQLITE=1)
+cd ../dist   
+install -v -m755 Linux*/lib/*.so              /usr/lib 
+install -v -m644 Linux*/lib/{*.chk,libcrmf.a} /usr/lib 
+install -v -m755 -d                           /usr/include/nss 
+cp -v -RL {public,private}/nss/*              /usr/include/nss
+install -v -m755 Linux*/bin/{certutil,nss-config,pk12util} /usr/bin 
+install -v -m644 Linux*/lib/pkgconfig/nss.pc  /usr/lib/pkgconfig
+ln -sfv ./pkcs11/p11-kit-trust.so /usr/lib/libnssckbi.so
+cd /sources
+rm -Rf nss-3.92
+#
+##sqlite
+tar -xvf sqlite-autoconf-3420000.tar.gz
+cd sqlite-autoconf-3420000
+./configure --prefix=/usr --disable-static --enable-fts{4,5} CPPFLAGS="-DSQLITE_ENABLE_COLUMN_METADATA=1 \
+ -DSQLITE_ENABLE_UNLOCK_NOTIFY=1 -DSQLITE_ENABLE_DBSTAT_VTAB=1 -DSQLITE_SECURE_DELETE=1          \
+ -DSQLITE_ENABLE_FTS3_TOKENIZER=1" 
+make
+make install
+cd /sources
+rm -Rf sqlite-autoconf-3420000
+#
 ## make-ca
 tar -xvf make-ca-1.12.tar.xz
 cd make-ca-1.12
@@ -156,7 +197,7 @@ make install
 cd /sources
 rm -Rf wget-1.21.4
 #
-##curl
+## curl
 tar -xvf curl-8.6.0.tar.xz
 cd curl-8.6.0 
 ./configure --prefix=/usr --disable-static  --with-openssl  --enable-threaded-resolver  --with-ca-path=/etc/ssl/certs &&
@@ -171,7 +212,7 @@ cp -v -R docs -T /usr/share/doc/curl-8.6.0
 cd /sources
 rm -Rf curl-8.6.0
 #
-##nano
+## nano
 if test -f nano-7.2.tar.xz; then
   tar -xvf nano-7.2.tar.xz
 else
@@ -276,5 +317,5 @@ echo "The system is not bootable and is intended as a chrootable x86-64 build en
 echo "To make the system into a full LFS install, run chapter 9 and 10 by hand"
 echo "please note that this environment has both curl and wget for file transfer"
 echo "please exit back to the livebootstrap environment"
-echo "the folowing BLFS packages are installed in this build : Curl, libpsl, libidn2, libunistring, nano, libtasn1, p11-kit, make-ca, git and wget "
+echo "the folowing BLFS packages are installed in this build : Curl, libpsl, libidn2, libunistring, nano, libtasn1, p11-kit, make-ca, git, NSPR, NSS, sqlite and wget "
 

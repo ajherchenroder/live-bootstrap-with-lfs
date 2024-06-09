@@ -66,6 +66,11 @@ if test "$REMOTE" = "local"; then
    curl http://192.168.2.102/LFS/make-ca-1.12.tar.xz -O
    curl http://192.168.2.102/LFS/wget-1.21.4.tar.gz -O
    curl http://192.168.2.102/LFS/git-2.41.0.tar.xz -O
+   curl http://192.168.2.102/LFS/nss-3.92.tar.gz -O
+   curl http://192.168.2.102/LFS/nss-3.92-standalone-1.patch -O
+   curl http://192.168.2.102/LFS/nspr-4.35.tar.gz -O
+   curl http://192.168.2.102/LFS/sqlite-autoconf-3420000.tar.gz -O
+
 else
    echo "remote"
    curl https://ftp.osuosl.org/pub/lfs/lfs-packages/lfs-packages-12.0.tar -O
@@ -81,6 +86,10 @@ else
    curl https://github.com/lfs-book/make-ca/releases/download/v1.12/make-ca-1.12.tar.xz -O -L
    curl https://ftp.gnu.org/gnu/wget/wget-1.21.4.tar.gz -O
    curl https://www.kernel.org/pub/software/scm/git/git-2.41.0.tar.xz -O -L
+   curl https://archive.mozilla.org/pub/security/nss/releases/NSS_3_92_RTM/src/nss-3.92.tar.gz -O -L
+   curl https://www.linuxfromscratch.org/patches/blfs/12.0/nss-3.92-standalone-1.patch -O -L 
+   curl https://archive.mozilla.org/pub/nspr/releases/v4.35/src/nspr-4.35.tar.gz -O -L
+   curl https://sqlite.org/2023/sqlite-autoconf-3420000.tar.gz -O -L
 fi
 
 #to do: add in any additional BLFS packages desired. 
