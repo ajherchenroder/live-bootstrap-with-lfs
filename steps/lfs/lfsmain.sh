@@ -11,4 +11,4 @@ done
 /steps/lfs/lfs_setup.sh "$REMOTE"
 su lfs -c /mnt/lfs/lfs_setup3.sh
 /mnt/lfs/lfs_setup4.sh
-chroot /mnt/lfs /bin/bash
+chroot /mnt/lfs exec ./lfs_setup11.sh

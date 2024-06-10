@@ -1,0 +1,5 @@
+#!/bin/sh
+set -e
+git clone https://github.com/ajherchenroder/live-bootstrap-distro-build-scripts.git
+echo "cd into /target and run the desired build script"
+ 
