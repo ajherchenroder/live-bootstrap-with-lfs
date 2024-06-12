@@ -11,11 +11,20 @@ The environment is based on some old bash scripts I had made for installing LFS.
 
 Requirements
 
-In addition the the requirements of the live-bootstrap, you will need an additional partition to build the lfs environment in. 32 GB is sufficient for the task.
+In addition the the requirements of the live-bootstrap, you will need an additional partition to 
+build the lfs environment in. 32 GB is sufficient for the task.
 
-recommendations and notes.
+recommendations and notes
 
-I would recommend the use of a separate swap partition rather than using the swap system in the live-bootstrap. 8 GB is sufficient for the task. The repo is set up to use the chroot method by default. The defaults should work with the qemu mode and bare metal as is. If using the bubble wrap method, delete the contents of the /steps/after directory prior to running the live-bootstrap. It is also recommended that you download the live-bootstrap and lfs source files locally. I store them on a web server on my local NAS. To use a local repository search for "#local" in the lfs_setup.sh script located in /steps/lfs . modify the links to point to the local repository. I also recommend creating an additional partition. The partition would be used to build any of the follow on distributions that are being worked on.
+I would recommend the use of a separate swap partition rather than using the swap system in the
+live-bootstrap. 8 GB is sufficient for the task. The repo is set up to use the chroot method by 
+default. The defaults should work with the qemu mode and bare metal as is. If using the bubble
+wrap method, delete the contents of the /steps/after directory prior to running the live-
+bootstrap. It is also recommended that you download the live-bootstrap and lfs source files
+locally. I store them on a web server on my local NAS. To use a local repository search for 
+"#local" in the lfs_setup.sh script located in /steps/lfs. modify the links to point to the local
+repository. I also recommend creating an additional partition. The partition would be used to 
+build any of the follow on distributions that are being worked on.
 
 How to use:
 
@@ -23,7 +32,9 @@ How to use:
 2. git clone https://github.com/ajherchenroder/live-bootstrap-with-lfs
 3. git submodule update --init --recursive
 4. run rootfs.py with the desired options
+
 NOTE: The live-bootstrap will automatically terminate in the interactive mode except when using bubble wrap. In that case please use the interactive option.
+
 5. swapon the external swap partition (if desired)
 6. cd into /steps/lfs
 7. run ./lfsmain.sh (or ./lfsmain.sh -L if using a local repository) and follow the prompts
