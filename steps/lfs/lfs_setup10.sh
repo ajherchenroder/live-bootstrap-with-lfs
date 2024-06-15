@@ -246,6 +246,19 @@ make perllibdir=/usr/lib/perl5/5.38/site_perl install
 cd /sources
 rm -Rf git-2.41.0
 cd /sources
+#
+# libarchive
+tar -xvf libarchive-3.7.1.tar.xz
+cd libarchive-3.7.1
+./configure --prefix=/usr --disable-static
+make
+make install
+rm -Rf libarchive-3.7.1
+cd /sources
+
+#
+#end program builds
+#
 rm -rf /tmp/*
 find /usr/lib /usr/libexec -name \*.la -delete
 find /usr -depth -name $(uname -m)-lfs-linux-gnu\* | xargs rm -rf

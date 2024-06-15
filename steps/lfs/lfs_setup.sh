@@ -70,7 +70,8 @@ if test "$REMOTE" = "local"; then
    curl http://192.168.2.102/LFS/nss-3.92-standalone-1.patch -O
    curl http://192.168.2.102/LFS/nspr-4.35.tar.gz -O
    curl http://192.168.2.102/LFS/sqlite-autoconf-3420000.tar.gz -O
-
+   curl http://192.168.2.102/LFS/libarchive-3.7.1.tar.xz
+   curl http://192.168.2.102/LFS/libxml2-2.10.4.tar.xz
 else
    echo "remote"
    curl https://ftp.osu.org/pub/lfs/lfs-packages/lfs-packages-12.0.tar -O
@@ -90,6 +91,8 @@ else
    curl https://www.linuxfromscratch.org/patches/blfs/12.0/nss-3.92-standalone-1.patch -O -L 
    curl https://archive.mozilla.org/pub/nspr/releases/v4.35/src/nspr-4.35.tar.gz -O -L
    curl https://sqlite.org/2023/sqlite-autoconf-3420000.tar.gz -O -L
+   curl https://github.com/libarchive/libarchive/releases/download/v3.7.1/libarchive-3.7.1.tar.xz -O -L
+   curl https://download.gnome.org/sources/libxml2/2.10/libxml2-2.10.4.tar.xz -O -L
 fi
 
 #to do: add in any additional BLFS packages desired. 
