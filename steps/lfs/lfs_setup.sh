@@ -70,8 +70,17 @@ if test "$REMOTE" = "local"; then
    curl http://192.168.2.102/LFS/nss-3.92-standalone-1.patch -O
    curl http://192.168.2.102/LFS/nspr-4.35.tar.gz -O
    curl http://192.168.2.102/LFS/sqlite-autoconf-3420000.tar.gz -O
-   curl http://192.168.2.102/LFS/libarchive-3.7.1.tar.xz
-   curl http://192.168.2.102/LFS/libxml2-2.10.4.tar.xz
+   curl http://192.168.2.102/LFS/libarchive-3.7.1.tar.xz -O
+   curl http://192.168.2.102/LFS/libxml2-2.10.4.tar.xz -O
+   curl http://192.168.2.102/LFS/libuv-v1.46.0.tar.gz -O
+   curl http://192.168.2.102/LFS/nghttp2-1.55.1.tar.xz -O
+   curl http://192.168.2.102/LFS/cmake-3.27.2.tar.gz -O
+   curl http://192.168.2.102/LFS/llvm-16.0.5.src.tar.xz -O
+   curl http://192.168.2.102/LFS/llvm-cmake.src.tar.xz -O
+   curl http://192.168.2.102/LFS/llvm-third-party.src.tar.xz -O
+   curl http://192.168.2.102/LFS/clang-16.0.5.src.tar.xz -O
+   curl http://192.168.2.102/LFS/clang-16.0.5-enable_default_ssp-1.patch -O
+   curl http://192.168.2.102/LFS/compiler-rt-16.0.5.src.tar.xz -O
 else
    echo "remote"
    curl https://ftp.osu.org/pub/lfs/lfs-packages/lfs-packages-12.0.tar -O
@@ -93,6 +102,17 @@ else
    curl https://sqlite.org/2023/sqlite-autoconf-3420000.tar.gz -O -L
    curl https://github.com/libarchive/libarchive/releases/download/v3.7.1/libarchive-3.7.1.tar.xz -O -L
    curl https://download.gnome.org/sources/libxml2/2.10/libxml2-2.10.4.tar.xz -O -L
+   curl https://github.com/llvm/llvm-project/releases/download/llvmorg-16.0.5/llvm-16.0.5.src.tar.xz -O -L
+   curl https://anduin.linuxfromscratch.org/BLFS/llvm/llvm-cmake.src.tar.xz -O -L
+   curl https://anduin.linuxfromscratch.org/BLFS/llvm/llvm-third-party.src.tar.xz -O -L
+   curl https://github.com/llvm/llvm-project/releases/download/llvmorg-16.0.5/clang-16.0.5.src.tar.xz -O -L
+   curl https://www.linuxfromscratch.org/patches/blfs/12.0/clang-16.0.5-enable_default_ssp-1.patch -O -L
+   curl https://github.com/llvm/llvm-project/releases/download/llvmorg-16.0.5/compiler-rt-16.0.5.src.tar.xz -O -L
+   curl https://dist.libuv.org/dist/v1.46.0/libuv-v1.46.0.tar.gz -O -L 
+   curl https://github.com/nghttp2/nghttp2/releases/download/v1.55.1/nghttp2-1.55.1.tar.xz -O -L
+   curl https://cmake.org/files/v3.27/cmake-3.27.2.tar.gz -O -L
+
+
 fi
 
 #to do: add in any additional BLFS packages desired. 

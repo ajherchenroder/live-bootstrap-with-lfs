@@ -245,17 +245,92 @@ make
 make perllibdir=/usr/lib/perl5/5.38/site_perl install
 cd /sources
 rm -Rf git-2.41.0
-cd /sources
 #
-# libarchive
+## libxml2
+tar -xvf libxml2-2.10.4.tar.xz
+cd libxml2-2.10.4
+./configure --prefix=/usr --sysconfdir=/etc --disable-static  --with-history PYTHON=/usr/bin/python3 \
+--docdir=/usr/share/doc/libxml2-2.10.4
+make
+make install
+cd /sources
+rm -Rf libxml2-2.10.4
+#
+## libarchive
 tar -xvf libarchive-3.7.1.tar.xz
 cd libarchive-3.7.1
 ./configure --prefix=/usr --disable-static
 make
 make install
-rm -Rf libarchive-3.7.1
 cd /sources
-
+rm -Rf libarchive-3.7.1
+#
+## libuv
+tar -xvf libuv-v1.46.0.tar.gz 
+cd libuv-v1.46.0
+sh autogen.sh 
+./configure --prefix=/usr --disable-static
+make 
+make install
+cd /sources
+rm -Rf libuv-v1.46.0
+#
+##nghttp2
+tar -xvf nghttp2-1.55.1.tar.xz
+cd nghttp2-1.55.1
+/configure --prefix=/usr --disable-static --enable-lib-only --docdir=/usr/share/doc/nghttp2-1.55.1
+make
+make install
+cd /sources
+rm -Rf nghttp2-1.55.1
+#
+##cmake
+tar -xvf cmake-3.27.2.tar.gz
+cd cmake-3.27.2
+sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
+./bootstrap --prefix=/usr --system-libs --mandir=/share/man --no-system-jsoncpp --no-system-cppdap --no-system-librhash \
+  --docdir=/share/doc/cmake-3.27.2
+make
+make install
+cd /sources
+rm -Rf cmake-3.27.2
+#
+## clang/llvm
+tar -xvf llvm-16.0.5.src.tar.xz
+cd llvm-16.0.5
+tar -xf ../llvm-cmake.src.tar.xz                                   
+tar -xf ../llvm-third-party.src.tar.xz                             
+sed '/LLVM_COMMON_CMAKE_UTILS/s@../cmake@llvm-cmake.src@'          \
+    -i CMakeLists.txt                                              
+sed '/LLVM_THIRD_PARTY_DIR/s@../third-party@llvm-third-party.src@' \
+    -i cmake/modules/HandleLLVMOptions.cmake
+tar -xf ../clang-16.0.5.src.tar.xz -C tools &&
+mv tools/clang-16.0.5.src tools/clang
+tar -xf ../compiler-rt-16.0.5.src.tar.xz -C projects &&
+mv projects/compiler-rt-16.0.5.src projects/compiler-rt
+grep -rl '#!.*python' | xargs sed -i '1s/python$/python3/'
+patch -Np2 -d tools/clang <../clang-16.0.5-enable_default_ssp-1.patch
+sed 's/clang_dfsan/& -fno-stack-protector/' \
+    -i projects/compiler-rt/test/dfsan/origin_unaligned_memtrans.c
+mkdir -v build
+cd       build
+CC=gcc CXX=g++                                  \
+cmake -DCMAKE_INSTALL_PREFIX=/usr               \
+      -DLLVM_ENABLE_FFI=ON                      \
+      -DCMAKE_BUILD_TYPE=Release                \
+      -DLLVM_BUILD_LLVM_DYLIB=ON                \
+      -DLLVM_LINK_LLVM_DYLIB=ON                 \
+      -DLLVM_ENABLE_RTTI=ON                     \
+      -DLLVM_TARGETS_TO_BUILD="host;AMDGPU;BPF" \
+      -DLLVM_BINUTILS_INCDIR=/usr/include       \
+      -DLLVM_INCLUDE_BENCHMARKS=OFF             \
+      -DCLANG_DEFAULT_PIE_ON_LINUX=ON           \
+      -Wno-dev -G Ninja ..                      
+ninja
+ninja install &&
+cp bin/FileCheck /usr/bin
+cd /sources
+rm -Rf llvm-16.0.5
 #
 #end program builds
 #
@@ -331,6 +406,6 @@ echo "The system is not bootable and is intended as a chrootable x86-64 build en
 echo "To make the system into a full LFS install, run chapter 9 and 10 by hand"
 echo "please note that this environment has both curl and wget for file transfer"
 echo "please exit back to the livebootstrap environment"
-echo "the folowing BLFS packages are installed in this build : Curl, libpsl, libidn2, libunistring, nano, libtasn1, p11-kit, make-ca, git, NSPR, NSS, sqlite and wget "
+echo "the folowing BLFS packages are installed in this build : Curl, libpsl, libidn2, libunistring, nano, libtasn1, p11-kit, make-ca, git, NSPR, NSS, sqlite, libarchive, libuv, nghttp2, cmake, clang/llvm and wget "
 echo "run source /etc/profile to set up your environment."
 
