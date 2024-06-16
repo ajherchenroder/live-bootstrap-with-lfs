@@ -278,7 +278,7 @@ rm -Rf libuv-v1.46.0
 ##nghttp2
 tar -xvf nghttp2-1.55.1.tar.xz
 cd nghttp2-1.55.1
-/configure --prefix=/usr --disable-static --enable-lib-only --docdir=/usr/share/doc/nghttp2-1.55.1
+./configure --prefix=/usr --disable-static --enable-lib-only --docdir=/usr/share/doc/nghttp2-1.55.1
 make
 make install
 cd /sources
