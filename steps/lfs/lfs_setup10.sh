@@ -297,7 +297,7 @@ rm -Rf cmake-3.27.2
 #
 ## clang/llvm
 tar -xvf llvm-16.0.5.src.tar.xz
-cd llvm-16.0.5
+cd llvm-16.0.5.src
 tar -xf ../llvm-cmake.src.tar.xz                                   
 tar -xf ../llvm-third-party.src.tar.xz                             
 sed '/LLVM_COMMON_CMAKE_UTILS/s@../cmake@llvm-cmake.src@'          \
