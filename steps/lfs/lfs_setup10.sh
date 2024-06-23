@@ -340,7 +340,7 @@ make
 make install
 cd /sources
 rm -Rf which-2.21
-tar -xvr time-1.9.tar.gz
+tar -xvf time-1.9.tar.gz
 cd time-1.9
 ./configure --prefix=/usr
 make
