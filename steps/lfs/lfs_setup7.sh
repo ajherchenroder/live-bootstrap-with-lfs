@@ -149,9 +149,8 @@ make PREFIX=/usr install
 cp -av libbz2.so.* /usr/lib
 ln -sv libbz2.so.1.0.8 /usr/lib/libbz2.so
 cp -v bzip2-shared /usr/bin/bzip2
-for i in /usr/bin/{bzcat,bunzip2}; do
-  ln -sfv bzip2 $i
-done
+ln -sfv bzip2 /usr/bin/bzcat
+ln -sfv bzip2 /usr/bin/bunzip2
 rm -fv /usr/lib/libbz2.a
 cd /sources
 rm -Rf bzip2-1.0.8
