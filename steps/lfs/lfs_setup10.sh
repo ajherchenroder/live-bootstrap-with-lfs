@@ -358,6 +358,16 @@ make DEST_HOME=/usr DEST_MAN=/usr/share/man DEST_SHARE_DOC=/usr/share/doc/p7zip-
 cd /sources
 rm -Rf p7zip-17.04
 #
+##lzip 
+tar -xvf lzip-1.24.tar.gz
+cd lzip-1.24
+./configure --prefix=/usr
+make
+make install
+cd /sources
+rm -Rf lzip-1.24
+
+#
 #end program builds
 #
 rm -rf /tmp/*
