@@ -347,7 +347,16 @@ make
 make install
 cd /sources
 rm -Rf time-1.9
-
+#
+#p7zip
+tar -xvf p7zip-17.04.tar.gz
+cd p7zip-17.04
+sed '/^gzip/d' -i install.sh
+sed -i '160a if(_buffer == nullptr || _size == _pos) return E_FAIL;' CPP/7zip/Common/StreamObjects.cpp
+make all3
+make DEST_HOME=/usr DEST_MAN=/usr/share/man DEST_SHARE_DOC=/usr/share/doc/p7zip-17.04 install
+cd /sources
+rm -Rf p7zip-17.04
 #
 #end program builds
 #
