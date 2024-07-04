@@ -359,13 +359,13 @@ cd /sources
 rm -Rf p7zip-17.04
 #
 ##lzip 
-tar -xvf lzip-1.24.tar.gz
-cd lzip-1.24
+tar -xvf lzip-1.24.1.tar.gz
+cd lzip-1.24.1
 ./configure --prefix=/usr
 make
 make install
 cd /sources
-rm -Rf lzip-1.24
+rm -Rf lzip-1.24.1
 
 #
 #end program builds
