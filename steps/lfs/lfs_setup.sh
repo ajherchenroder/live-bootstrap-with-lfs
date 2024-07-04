@@ -85,6 +85,8 @@ if test "$REMOTE" = "local"; then
    curl http://192.168.2.102/LFS/time-1.9.tar.gz -O
    curl http://192.168.2.102/LFS/p7zip-17.04.tar.gz -O -L
    curl http://192.168.2.102/LFS/lzip-1.24.1.tar.gz -O -L
+   curl http://192.168.2.102/LFS/popt-1.19.tar.gz -O -L
+   curl http://192.168.2.102/LFS/rsync-3.2.7.tar.gz -O -L
 else
    echo "remote"
    curl https://ftp.osu.org/pub/lfs/lfs-packages/lfs-packages-12.0.tar -O
@@ -119,6 +121,9 @@ else
    curl https://ftp.gnu.org/gnu/time/time-1.9.tar.gz -O -L
    curl https://github.com/p7zip-project/p7zip/archive/v17.04/p7zip-17.04.tar.gz -O -L
    curl http://download.savannah.gnu.org/releases/lzip/lzip-1.24.1.tar.gz -O -L
+   curl ftp://ftp.rpm.org/pub/rpm/popt/releases/popt-1.x/popt-1.19.tar.gz -O -L
+   curl https://www.samba.org/ftp/rsync/src/rsync-3.2.7.tar.gz -O -L 
+
 fi
 
 #to do: add in any additional BLFS packages desired. 

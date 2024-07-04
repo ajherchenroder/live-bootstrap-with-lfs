@@ -366,6 +366,25 @@ make
 make install
 cd /sources
 rm -Rf lzip-1.24
+#
+##popt
+tar -xvf popt-1.19.tar.gz
+cd popt-1.19
+./configure --prefix=/usr --disable-static
+make
+make install
+cd /sources 
+rm -Rf popt-1.19
+#
+## rsync
+tar -xvf rsync-3.2.7.tar.gz
+cd rsync-3.2.7
+./configure --prefix=/usr --disable-lz4 --disable-xxhash --without-included-zlib &&
+make
+make install
+cd /sources
+rm -Rf 
+rsync-3.2.7
 
 #
 #end program builds
