@@ -383,8 +383,7 @@ cd rsync-3.2.7
 make
 make install
 cd /sources
-rm -Rf 
-rsync-3.2.7
+rm -Rf rsync-3.2.7
 
 #
 #end program builds
