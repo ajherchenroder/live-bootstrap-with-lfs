@@ -7,4 +7,4 @@ mount -vt devpts devpts /dev/pts
 mount -vt proc proc /proc
 mount -vt sysfs sysfs /sys
 mount -vt tmpfs tmpfs /run
-
+mount -t tmpfs -o nosuid,nodev tmpfs /dev/shm
