@@ -68,6 +68,11 @@ users:x:999:
 nogroup:x:65534:
 EOF
 #
+# add resolve.conf
+cat > /etc/resolv.conf << "EOF"
+nameserver 1.1.1.1
+EOF
+#
 ## create a test user
 echo "tester:x:101:101::/home/tester:/bin/bash" >> /etc/passwd
 echo "tester:x:101:" >> /etc/group
