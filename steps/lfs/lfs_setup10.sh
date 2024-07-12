@@ -392,7 +392,7 @@ make mrproper
 make defconfig
 make
 make modules_install
-cd sources
+cd /sources
 rm -Rf linux-6.4.12
 
 
