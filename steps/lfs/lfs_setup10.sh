@@ -384,6 +384,17 @@ make
 make install
 cd /sources
 rm -Rf rsync-3.2.7
+#
+## linux kernel
+tar -xvf linux-6.4.12.tar.xz
+cd linux-6.4.12
+make mrproper
+make defconfig
+make
+make modules_install
+cd sources
+rm -Rf linux-6.4.12
+
 
 #
 #end program builds
