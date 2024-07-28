@@ -88,6 +88,7 @@ if test "$REMOTE" = "local"; then
    curl http://192.168.2.102/LFS/popt-1.19.tar.gz -O -L
    curl http://192.168.2.102/LFS/rsync-3.2.7.tar.gz -O -L
    curl http://192.168.2.102/LFS/linux-6.4.12.tar.xz -O -L
+   curl http://192.168.2.102/LFS/dosfstools-4.2.tar.gz -O -L
 else
    echo "remote"
    curl https://ftp.osu.org/pub/lfs/lfs-packages/lfs-packages-12.0.tar -O
@@ -125,6 +126,7 @@ else
    curl ftp://ftp.rpm.org/pub/rpm/popt/releases/popt-1.x/popt-1.19.tar.gz -O -L
    curl https://www.samba.org/ftp/rsync/src/rsync-3.2.7.tar.gz -O -L 
    curl https://www.kernel.org/pub/linux/kernel/v6.x/linux-6.4.12.tar.xz -O -L
+   curl https://github.com/dosfstools/dosfstools/releases/download/v4.2/dosfstools-4.2.tar.gz -O -L
 
 fi
 

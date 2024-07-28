@@ -394,6 +394,15 @@ make
 make modules_install
 cd /sources
 rm -Rf linux-6.4.12
+#
+## dosfstools
+tar -xvf dosfstools-4.2.tar.gz
+cd dosfstools-4.2
+./configure --prefix=/usr --enable-compat-symlinks --mandir=/usr/share/man --docdir=/usr/share/doc/dosfstools-4.2
+make
+make install
+cd /sources
+rm -Rf dosfstools-4.2
 
 
 #
