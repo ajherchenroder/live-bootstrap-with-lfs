@@ -91,7 +91,7 @@ if test "$REMOTE" = "local"; then
    curl http://192.168.2.102/LFS/dosfstools-4.2.tar.gz -O -L
 else
    echo "remote"
-   curl https://ftp.osu.org/pub/lfs/lfs-packages/lfs-packages-12.0.tar -O
+   curl http://ftp.lfs-matrix.net/pub/lfs/lfs-packages/lfs-packages-12.0.tar -O -l
    tar -xvf lfs-packages-12.0.tar
    cp $LFS/sources/12.0/* $LFS/sources/
    curl https://curl.se/download/curl-8.6.0.tar.xz -O
