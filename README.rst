@@ -23,8 +23,7 @@ wrap method, delete the contents of the /steps/after directory prior to running 
 bootstrap. It is also recommended that you download the live-bootstrap and lfs source files
 locally. I store them on a web server on my local NAS. To use a local repository search for 
 "#local" in the lfs_setup.sh script located in /steps/lfs. modify the links to point to the local
-repository. I also recommend creating an additional partition. The partition would be used to 
-build any of the follow on distributions that are being worked on.
+repository. I also recommend creating an additional partition. The extra partition would be used to build any of the follow on distributions that are being worked on.
 
 How to use:
 
@@ -37,8 +36,8 @@ NOTE: The live-bootstrap will automatically terminate in the interactive mode ex
 
 5. swapon the external swap partition (if desired)
 6. cd into /steps/lfs
-7. run ./lfsmain.sh (or ./lfsmain.sh -L if using a local repository) and follow the prompts
-the scripts will end with you chrooted into the lfs partition.
+7. run ./lfsmain.sh (or ./lfsmain.sh -L if using a local repository) and follow the prompts.
+The scripts will end with you chrooted into the lfs partition.
 
 Original live-bootstrap readme follows:
 
