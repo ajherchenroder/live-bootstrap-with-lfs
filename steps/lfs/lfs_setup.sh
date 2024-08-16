@@ -89,6 +89,10 @@ if test "$REMOTE" = "local"; then
    curl http://192.168.2.102/LFS/rsync-3.2.7.tar.gz -O -L
    curl http://192.168.2.102/LFS/linux-6.4.12.tar.xz -O -L
    curl http://192.168.2.102/LFS/dosfstools-4.2.tar.gz -O -L
+   curl http://192.168.2.102/LFS/efivar-38.tar.bz2 -O -L
+   curl http://192.168.2.102/LFS/efivar-38-i686-1.patch -O -L
+   curl http://192.168.2.102/LFS/mandoc-1.14.6.tar.gz -O -L
+   curl http://192.168.2.102/LFS/efibootmgr-18.tar.gz -O -L
 else
    echo "remote"
    curl http://ftp.lfs-matrix.net/pub/lfs/lfs-packages/lfs-packages-12.0.tar -O -l
@@ -127,7 +131,10 @@ else
    curl https://www.samba.org/ftp/rsync/src/rsync-3.2.7.tar.gz -O -L 
    curl https://www.kernel.org/pub/linux/kernel/v6.x/linux-6.4.12.tar.xz -O -L
    curl https://github.com/dosfstools/dosfstools/releases/download/v4.2/dosfstools-4.2.tar.gz -O -L
-
+   curl https://github.com/rhboot/efivar/releases/download/38/efivar-38.tar.bz2 -O -L
+   curl https://www.linuxfromscratch.org/patches/blfs/12.0/efivar-38-i686-1.patch -O -L
+   curl https://mandoc.bsd.lv/snapshots/mandoc-1.14.6.tar.gz -O -L
+   curl https://github.com/rhboot/efibootmgr/archive/18/efibootmgr-18.tar.gz -O -L
 fi
 
 #to do: add in any additional BLFS packages desired. 
