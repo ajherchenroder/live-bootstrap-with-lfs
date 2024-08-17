@@ -133,15 +133,15 @@ cd /sources
 rm -Rf groff-1.23.0
 #
 ##grub
-tar -xvf grub-2.06.tar.xz
-cd grub-2.06
-patch -Np1 -i ../grub-2.06-upstream_fixes-1.patch
-./configure --prefix=/usr --sysconfdir=/etc --disable-efiemu --disable-werror
-make
-make install
-mv -v /etc/bash_completion.d/grub /usr/share/bash-completion/completions
-cd /sources
-rm -Rf grub-2.06
+#tar -xvf grub-2.06.tar.xz
+#cd grub-2.06
+#patch -Np1 -i ../grub-2.06-upstream_fixes-1.patch
+#./configure --prefix=/usr --sysconfdir=/etc --disable-efiemu --disable-werror
+#make
+#make install
+#mv -v /etc/bash_completion.d/grub /usr/share/bash-completion/completions
+#cd /sources
+#rm -Rf grub-2.06
 #
 ## gzip
 tar -xvf gzip-1.12.tar.xz
