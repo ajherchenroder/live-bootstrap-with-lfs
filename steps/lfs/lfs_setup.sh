@@ -93,6 +93,7 @@ if test "$REMOTE" = "local"; then
    curl http://192.168.2.102/LFS/efivar-38-i686-1.patch -O -L
    curl http://192.168.2.102/LFS/mandoc-1.14.6.tar.gz -O -L
    curl http://192.168.2.102/LFS/efibootmgr-18.tar.gz -O -L
+   curl http://192.168.2.102/LFS/dhcpcd-10.0.2.tar.xz -O -L
 else
    echo "remote"
    curl http://ftp.lfs-matrix.net/pub/lfs/lfs-packages/lfs-packages-12.0.tar -O -l
@@ -135,6 +136,7 @@ else
    curl https://www.linuxfromscratch.org/patches/blfs/12.0/efivar-38-i686-1.patch -O -L
    curl https://mandoc.bsd.lv/snapshots/mandoc-1.14.6.tar.gz -O -L
    curl https://github.com/rhboot/efibootmgr/archive/18/efibootmgr-18.tar.gz -O -L
+   curl https://github.com/NetworkConfiguration/dhcpcd/releases/download/v10.0.2/dhcpcd-10.0.2.tar.xz -O -L
 fi
 
 #to do: add in any additional BLFS packages desired. 
