@@ -13,3 +13,5 @@ mount -vt sysfs sysfs /sys
 mount -vt tmpfs tmpfs /run
 mount -t tmpfs -o nosuid,nodev tmpfs /dev/shm
 env - PATH=${PREFIX}/bin PS1="\w # " setsid openvt -fec1 -- bash -i
+cd /steps/lfs
+./lfstarget.sh
