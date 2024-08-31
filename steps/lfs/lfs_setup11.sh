@@ -2,7 +2,8 @@
 set -e
 #
 ## make sure the profile is initiated and the certs are updated
-
+#reset the root password
+passwd -d root
 /usr/sbin/make-ca -g
 echo "this completes the basic LFS environment build. Please note that it has not been stripped."
 echo "The system is not bootable and is intended as a chrootable x86-64 build environment."
