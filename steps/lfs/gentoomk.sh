@@ -68,9 +68,10 @@ mv squashfs-root /var/db/repos/gentoo
 # Install temporary copy of portage
 tar xf /var/cache/distfiles/portage-3.0.65.tar.bz2
 cd portage-3.0.65
-patch -p1 -i ../portage.patch
+cp /tmp/portage.patch /var/cache/distfiles/portage.patch 
+patch -p1 -i ../portage.patch ##changed
 cd ..
-ln -sf portage-3.0.65 portage
+ln -sf portage-3.0.65 /portage ##changed 
 
 # Add portage user/group
 echo 'portage:x:250:250:portage:/var/tmp/portage:/bin/false' >> /etc/passwd
