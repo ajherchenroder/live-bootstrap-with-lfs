@@ -14,8 +14,9 @@
 #
 #The above copyright notice and this permission notice shall be included in all
 #copies or substantial portions of the Software.
-cp gentoomk.sh /
-cp gentoomk2.sh /
+mkdir /gentoo
+cp gentoomk.sh /gentoo
+cp gentoomk2.sh /gentoo
 ./gentoomk.sh
 chroot /gentoo /bin/bash --login gentoomk2.sh
 
