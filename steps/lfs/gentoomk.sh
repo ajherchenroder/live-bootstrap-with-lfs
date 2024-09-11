@@ -17,7 +17,7 @@
 mount -t proc proc /proc
 mount -t sysfs sysfs /sys
 mount -t devtmpfs devtmpfs /dev
-mount -t devpts devpts dev/pts
+mount -t devpts devpts /dev/pts
 mount -t tmpfs -o nosuid,nodev tmpfs /dev/shm 
 source /steps/env
 
