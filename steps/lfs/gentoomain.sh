@@ -14,6 +14,14 @@
 #
 #The above copyright notice and this permission notice shall be included in all
 #copies or substantial portions of the Software.
+/usr/sbin/fdisk -l | grep /dev
+read -p "Enter the partion to build Gentoo on (sdxx) -> " USEPART
+if ! test -d /gentoo 
+then 
+    mkdir /gentoo
+fi
+mount -v -t ext4 /dev/$USEPART /gentoo
+
 mkdir /gentoo
 cp gentoomk.sh /gentoo
 cp gentoomk2.sh /gentoo
