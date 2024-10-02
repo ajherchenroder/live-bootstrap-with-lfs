@@ -96,6 +96,8 @@ if test "$REMOTE" = "local"; then
    curl http://192.168.2.102/LFS/dhcpcd-10.0.2.tar.xz -O -L
    curl http://192.168.2.102/LFS/blfs-bootscripts-20230824.tar.xz -O -L
    curl http://192.168.2.102/LFS/linux-firmware-20240811.tar.gz -O -L
+   curl http://192.168.2.102/LFS/unzip60.tar.gz -O -L
+   curl http://192.168.2.102/LFS/unzip-6.0-consolidated_fixes-1.patch -O -L
 else
    echo "remote"
    curl http://ftp.lfs-matrix.net/pub/lfs/lfs-packages/lfs-packages-12.0.tar -O -l
@@ -141,6 +143,8 @@ else
    curl https://github.com/NetworkConfiguration/dhcpcd/releases/download/v10.0.2/dhcpcd-10.0.2.tar.xz -O -L
    curl https://anduin.linuxfromscratch.org/BLFS/blfs-bootscripts/blfs-bootscripts-20230824.tar.xz -O -L
    curl https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-20240811.tar.gz -O -L
+   curl https://downloads.sourceforge.net/infozip/unzip60.tar.gz -O -L
+   curl https://www.linuxfromscratch.org/patches/blfs/12.0/unzip-6.0-consolidated_fixes-1.patch -O -L
 fi
 
 #to do: add in any additional BLFS packages desired. 

@@ -403,6 +403,15 @@ make
 make install
 cd /sources
 rm -Rf dosfstools-4.2
+## unzip
+tar -xvf unzip60.tar.gz
+cd unzip60
+patch -Np1 -i ../unzip-6.0-consolidated_fixes-1.patch
+make -f unix/Makefile generic
+make prefix=/usr MANDIR=/usr/share/man/man1 -f unix/Makefile install
+cd /sources
+rm -Rf unzip60
+
 
 
 #
