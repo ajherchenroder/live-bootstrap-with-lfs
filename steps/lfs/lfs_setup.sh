@@ -98,6 +98,7 @@ if test "$REMOTE" = "local"; then
    curl http://192.168.2.102/LFS/linux-firmware-20240811.tar.gz -O -L
    curl http://192.168.2.102/LFS/unzip60.tar.gz -O -L
    curl http://192.168.2.102/LFS/unzip-6.0-consolidated_fixes-1.patch -O -L
+   curl http://192.168.2.102/LFS/cpio-2.14.tar.bz2
 else
    echo "remote"
    curl http://ftp.lfs-matrix.net/pub/lfs/lfs-packages/lfs-packages-12.0.tar -O -l
@@ -145,6 +146,7 @@ else
    curl https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-20240811.tar.gz -O -L
    curl https://downloads.sourceforge.net/infozip/unzip60.tar.gz -O -L
    curl https://www.linuxfromscratch.org/patches/blfs/12.0/unzip-6.0-consolidated_fixes-1.patch -O -L
+   curl https://ftp.gnu.org/gnu/cpio/cpio-2.14.tar.bz2 -O -L
 fi
 
 #to do: add in any additional BLFS packages desired. 
