@@ -3,7 +3,9 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 src_prepare() {
-    rm doc/standards.info
+    rm doc/*.info
+    rm man/*.1
+    rm tests/*.at
     autoreconf-2.69 -fi
 
     # Install autoconf data files into versioned directory
@@ -21,8 +23,8 @@ src_compile() {
 src_install() {
     make install MAKEINFO=true DESTDIR="${DESTDIR}"
 
-    ln -sf "${PREFIX}/bin/autoconf-2.71" "${DESTDIR}${PREFIX}/bin/autoconf"
-    ln -sf "${PREFIX}/bin/autoheader-2.71" "${DESTDIR}${PREFIX}/bin/autoheader"
-    ln -sf "${PREFIX}/bin/autom4te-2.71" "${DESTDIR}${PREFIX}/bin/autom4te"
-    ln -sf "${PREFIX}/bin/autoreconf-2.71" "${DESTDIR}${PREFIX}/bin/autoreconf"
+    ln -s autoconf-2.71 "${DESTDIR}${PREFIX}/bin/autoconf"
+    ln -s autoheader-2.71 "${DESTDIR}${PREFIX}/bin/autoheader"
+    ln -s autom4te-2.71 "${DESTDIR}${PREFIX}/bin/autom4te"
+    ln -s autoreconf-2.71 "${DESTDIR}${PREFIX}/bin/autoreconf"
 }

@@ -5,7 +5,9 @@
 src_prepare() {
     rm bin/autoconf.in
     rm -- Makefile.in */Makefile.in */*/Makefile.in aclocal.m4 configure
-    rm doc/standards.info doc/autoconf.info
+    rm doc/*.info
+    rm man/*.1
+    rm tests/*.at
 
     # Do not use pregenerated manpages
     sed -i '/SUBDIRS/s/ man//' Makefile.am
@@ -16,7 +18,6 @@ src_prepare() {
     autoconf-2.53
 
     # Otherwise automake-1.7 fails to find autoconf
-    ln -s "${PREFIX}"/bin/autoconf-2.53 "${PREFIX}"/bin/autoconf
     automake-1.7
 
     # Install autoconf data files into versioned directory
@@ -38,4 +39,8 @@ src_compile() {
 
 src_install() {
     make install MAKEINFO=true DESTDIR="${DESTDIR}"
+    ln -s autoconf-2.54 "${DESTDIR}${PREFIX}/bin/autoconf"
+    ln -s autoheader-2.54 "${DESTDIR}${PREFIX}/bin/autoheader"
+    ln -s autom4te-2.54 "${DESTDIR}${PREFIX}/bin/autom4te"
+    ln -s autoreconf-2.54 "${DESTDIR}${PREFIX}/bin/autoreconf"
 }

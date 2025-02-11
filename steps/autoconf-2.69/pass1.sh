@@ -4,7 +4,9 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 src_prepare() {
-    rm doc/standards.info man/*.1
+    rm doc/*.info
+    rm man/*.1
+    rm tests/*.at
     AUTOMAKE=automake-1.11 ACLOCAL=aclocal-1.11 autoreconf-2.64 -f
 
     # Install autoconf data files into versioned directory
@@ -23,4 +25,8 @@ src_compile() {
 
 src_install() {
     make install MAKEINFO=true DESTDIR="${DESTDIR}"
+    ln -s autoconf-2.69 "${DESTDIR}${PREFIX}/bin/autoconf"
+    ln -s autoheader-2.69 "${DESTDIR}${PREFIX}/bin/autoheader"
+    ln -s autom4te-2.69 "${DESTDIR}${PREFIX}/bin/autom4te"
+    ln -s autoreconf-2.69 "${DESTDIR}${PREFIX}/bin/autoreconf"
 }

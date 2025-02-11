@@ -7,8 +7,9 @@
 src_prepare() {
     default
 
+    rm -r to.do
+
     touch config.h
-    rm parse.c parse.h scan.c skel.c
 }
 
 src_compile() {

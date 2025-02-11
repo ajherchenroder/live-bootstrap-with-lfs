@@ -14,7 +14,7 @@ on:
 jobs:
   pass1:
     name: Run up to Linux build under bubblewrap
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Install bubblewrap
         run: sudo apt install bubblewrap
@@ -32,20 +32,24 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: |
-            distfiles
+            mirror
+            mirror-state
           key: cache-${{ hashFiles('steps/*/sources') }}
+          restore-keys: |
+            cache-
       - name: Get sources
         if: steps.cache.outputs.cache-hit != 'true'
-        run: ./download-distfiles.sh
+        run: mkdir -p mirror mirror-state && ./mirror.sh mirror mirror-state
       - name: Cache sources
         if: steps.cache.outputs.cache-hit != 'true'
         uses: actions/cache/save@v4
         with:
           path: |
-            distfiles
+            mirror
+            mirror-state
           key: cache-${{ hashFiles('steps/*/sources') }}
       - name: Run bootstrap
-        run: ./rootfs.py --bwrap --external-sources --build-kernels --cores 2 --internal-ci pass1
+        run: ./rootfs.py --bwrap --external-sources --build-kernels --cores 2 --internal-ci pass1 --mirror file://${PWD}/mirror
       - name: Archive created packages
         if: failure() # archive failed builds progress
         uses: actions/upload-artifact@v4
@@ -63,7 +67,7 @@ jobs:
   pass2:
     name: Run up to Python bootstrap under bubblewrap
     needs: pass1
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Install bubblewrap
         run: sudo apt install bubblewrap
@@ -87,18 +91,12 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: |
-            distfiles
+            mirror
+            mirror-state
           key: cache-${{ hashFiles('steps/*/sources') }}
-      - name: Get sources
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: ./download-distfiles.sh
-      - name: Cache sources
-        if: steps.cache.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: |
-            distfiles
-          key: cache-${{ hashFiles('steps/*/sources') }}
+          fail-on-cache-miss: true
+      - name: Copy distfiles
+        run: ./download-distfiles.sh file:///${PWD}/mirror
       - name: Run bootstrap
         run: ./rootfs.py --bwrap --external-sources --build-kernels --cores 2 --internal-ci pass2
       - name: Archive created packages
@@ -118,7 +116,7 @@ jobs:
   pass3:
     name: Run remaining builds under bubblewrap
     needs: pass2
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Install bubblewrap
         run: sudo apt install bubblewrap
@@ -142,20 +140,14 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: |
-            distfiles
+            mirror
+            mirror-state
           key: cache-${{ hashFiles('steps/*/sources') }}
-      - name: Get sources
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: ./download-distfiles.sh
-      - name: Cache sources
-        if: steps.cache.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: |
-            distfiles
-          key: cache-${{ hashFiles('steps/*/sources') }}
+          fail-on-cache-miss: true
+      - name: Copy distfiles
+        run: ./download-distfiles.sh file:///${PWD}/mirror
       - name: Run bootstrap
-        run: ./rootfs.py --bwrap --external-sources --build-kernels --cores 2 --internal-ci pass3
+        run: ./rootfs.py --bwrap --external-sources --build-kernels --cores 2 --internal-ci pass3 --mirror file://${PWD}/mirror
       - name: Archive created packages
         if: always() # archive both failed and successful builds
         uses: actions/upload-artifact@v4

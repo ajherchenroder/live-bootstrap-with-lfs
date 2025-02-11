@@ -6,7 +6,9 @@ src_prepare() {
     default
 
     rm -- Makefile.in */Makefile.in */*/Makefile.in aclocal.m4 configure
-    rm doc/standards.info doc/autoconf.info
+    rm doc/*.info
+    rm man/*.1
+    rm tests/*.at
 
     # Do not use pregenerated manpages
     sed -i '/SUBDIRS/s/ man//' Makefile.am
@@ -36,4 +38,8 @@ src_compile() {
 
 src_install() {
     make install MAKEINFO=true DESTDIR="${DESTDIR}"
+    ln -s autoconf-2.53 "${DESTDIR}${PREFIX}/bin/autoconf"
+    ln -s autoheader-2.53 "${DESTDIR}${PREFIX}/bin/autoheader"
+    ln -s autom4te-2.53 "${DESTDIR}${PREFIX}/bin/autom4te"
+    ln -s autoreconf-2.53 "${DESTDIR}${PREFIX}/bin/autoreconf"
 }
