@@ -6,7 +6,7 @@ git clone https://github.com/ajherchenroder/live-bootstrap-distro-build-scripts.
 mkdir target
 cp /live-bootstrap-distro-build-scripts/target/* /target
 mkdir /mnt/live-bootstrap/target/target
-cp /live-bootstrap-distro-build-scripts/target/* /mnt/live-bootstrap/target/target/target
+cp /live-bootstrap-distro-build-scripts/target/* /mnt/live-bootstrap/target/target
 rm -Rf /live-bootstrap-distro-build-scripts
 chmod +x,+x,+x /target/*
 chmod +x,+x,+x /mnt/live-bootstrap/target/target/*
