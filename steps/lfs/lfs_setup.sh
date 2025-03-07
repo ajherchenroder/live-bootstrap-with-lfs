@@ -20,8 +20,9 @@ chmod -R 777 /steps
 chmod -R 777 /tmp
 chmod -R 777 /usr
 chmod -c 0400 /etc/doas.conf
-/usr/sbin/fdisk -l | grep /dev
-read -p "Enter the partion to mount (sdxx) -> " USEPART
+#/usr/sbin/fdisk -l | grep /dev
+#read -p "Enter the partion to mount (sdxx) -> " USEPART
+USEPART=$(</lfsdisktouse)
 if ! test -d /mnt  
 then 
     mkdir /mnt
@@ -30,7 +31,7 @@ if ! test -d /mnt/lfs
 then 
     mkdir /mnt/lfs
 fi
-mount -v -t ext4 /dev/$USEPART /mnt/lfs
+mount -v -t ext4 $USEPART'3' /mnt/lfs
 # set the LFS Var
 export LFS=/mnt/lfs
 # get the sources
