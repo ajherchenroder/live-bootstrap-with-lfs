@@ -22,7 +22,7 @@ chmod -R 777 /usr
 chmod -c 0400 /etc/doas.conf
 #/usr/sbin/fdisk -l | grep /dev
 #read -p "Enter the partion to mount (sdxx) -> " USEPART
-USEPART=$(</lfsdisktouse)
+USEPART=$(<lfsdisktouse)
 if ! test -d /mnt  
 then 
     mkdir /mnt
