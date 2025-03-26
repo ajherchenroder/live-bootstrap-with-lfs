@@ -2,7 +2,7 @@
 set -e
 DISKTOUSE=$(</lfsdisktouse)
 mount $DISKTOUSE'2' /mnt
-git clone https://github.com/ajherchenroder/live-bootstrap-distro-build-scripts.git
+env GIT_SSL_NO_VERIFY=true git clone https://github.com/ajherchenroder/live-bootstrap-distro-build-scripts.git
 mkdir target
 cp /live-bootstrap-distro-build-scripts/target/* /target
 mkdir /mnt/live-bootstrap/target/target
