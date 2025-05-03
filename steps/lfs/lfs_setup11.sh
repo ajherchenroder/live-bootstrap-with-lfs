@@ -1,5 +1,5 @@
 #!/bin/sh
-set -e
+#set -e
 #
 ## make sure the profile is initiated and the certs are updated
 #reset the root password
