@@ -1,5 +1,5 @@
 #!/bin/sh
-#set -e
+set -e
 #
 ## make sure the profile is initiated and the certs are updated
 #reset the root password
@@ -12,7 +12,7 @@ echo "please note that this environment has both curl and wget for file transfer
 echo "please exit back to the livebootstrap environment"
 echo "the folowing BLFS packages are installed in this build : Curl, libpsl, libidn2, libunistring, nano, libtasn1, p11-kit"
 echo "make-ca, git, NSPR, NSS, sqlite, libarchive, libuv, nghttp2, cmake, clang/llvm, gnu-which, time, p7zip, lzip, popt,"
-echo "rsync, the linux kernel, dosfstools, unzip, cpio and wget"
+echo "rsync, the linux kernel, dosfstools, unzip, cpio, sgml-common, LZO, Nettle, libarchive, docbook-xml, git  and wget"
 #echo "run source /etc/profile to set up your environment."
 
 

@@ -421,8 +421,265 @@ make
 make install
 cd /sources
 rm -Rf cpio-2.14
+#
+## sgml-common
+tar -xvf sgml-common-0.6.3.tgz
+cd sgml-common-0.6.3
+patch -Np1 -i ../sgml-common-0.6.3-manpage-1.patch && autoreconf -f -i
+./configure --prefix=/usr --sysconfdir=/etc && make
+make docdir=/usr/share/doc install && 
+install-catalog --add /etc/sgml/sgml-ent.cat \ /usr/share/sgml/sgml-iso-entities-8879.1986/catalog
+install-catalog --add /etc/sgml/sgml-docbook.cat \ /etc/sgml/sgml-ent.cat
+cd /sources
+rm -Rf sgml-common-0.6.3
+#
+## lzo
+tar -xvf lzo-2.10.tar.gz
+cd lzo-2.10
+./configure --prefix=/usr                    \
+            --enable-shared                  \
+            --disable-static                 \
+            --docdir=/usr/share/doc/lzo-2.10 &&
+make
+make install
+cd /sources
+rm -Rf lzo-2.10
+#
+## Nettle
+tar -xvf nettle-3.9.1.tar.gz
+cd nettle-3.9.1
+./configure --prefix=/usr --disable-static
+make
+make install
+chmod   -v   755 /usr/lib/lib{hogweed,nettle}.so
+install -v -m755 -d /usr/share/doc/nettle-3.9.1
+install -v -m644 nettle.{html,pdf} /usr/share/doc/nettle-3.9.1
+cd /sources
+rm -Rf nettle-3.9.1
+#
+##libarchive
+tar -xvf libarchive-3.7.1.tar.xz
+cd libarchive-3.7.1
+./configure --prefix=/usr --disable-static
+make
+make install
+cd /sources
+rm -Rf libarchive-3.7.1
+#
+## docbook-xml
+mkdir docbook
+cd docbook
+unzip ../docbook-5.0.zip
+install -vdm755 /usr/share/xml/docbook/schema/{dtd,rng,sch,xsd}/5.0 
+install -vm644  dtd/* /usr/share/xml/docbook/schema/dtd/5.0         
+install -vm644  rng/* /usr/share/xml/docbook/schema/rng/5.0         
+install -vm644  sch/* /usr/share/xml/docbook/schema/sch/5.0         
+install -vm644  xsd/* /usr/share/xml/docbook/schema/xsd/5.0
+if [ ! -e /etc/xml/docbook-5.0 ]; then
+    xmlcatalog --noout --create /etc/xml/docbook-5.0
+fi &&
 
+xmlcatalog --noout --add "public" \
+  "-//OASIS//DTD DocBook XML 5.0//EN" \
+  "file:///usr/share/xml/docbook/schema/dtd/5.0/docbook.dtd" \
+  /etc/xml/docbook-5.0 &&
+xmlcatalog --noout --add "system" \
+  "http://www.oasis-open.org/docbook/xml/5.0/dtd/docbook.dtd" \
+  "file:///usr/share/xml/docbook/schema/dtd/5.0/docbook.dtd" \
+  /etc/xml/docbook-5.0 &&
+xmlcatalog --noout --add "system" \
+  "http://docbook.org/xml/5.0/dtd/docbook.dtd" \
+  "file:///usr/share/xml/docbook/schema/dtd/5.0/docbook.dtd" \
+  /etc/xml/docbook-5.0 &&
 
+xmlcatalog --noout --add "uri" \
+  "http://www.oasis-open.org/docbook/xml/5.0/rng/docbook.rng" \
+  "file:///usr/share/xml/docbook/schema/rng/5.0/docbook.rng" \
+  /etc/xml/docbook-5.0 &&
+xmlcatalog --noout --add "uri" \
+  "http://docbook.org/xml/5.0/rng/docbook.rng" \
+  "file:///usr/share/xml/docbook/schema/rng/5.0/docbook.rng" \
+  /etc/xml/docbook-5.0 &&
+xmlcatalog --noout --add "uri" \
+  "http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng" \
+  "file:///usr/share/xml/docbook/schema/rng/5.0/docbookxi.rng" \
+  /etc/xml/docbook-5.0 &&
+xmlcatalog --noout --add "uri" \
+  "http://docbook.org/xml/5.0/rng/docbookxi.rng" \
+  "file:///usr/share/xml/docbook/schema/rng/5.0/docbookxi.rng" \
+  /etc/xml/docbook-5.0 &&
+xmlcatalog --noout --add "uri" \
+  "http://www.oasis-open.org/docbook/xml/5.0/rnc/docbook.rnc" \
+  "file:///usr/share/xml/docbook/schema/rng/5.0/docbook.rnc" \
+  /etc/xml/docbook-5.0 &&
+xmlcatalog --noout --add "uri" \
+  "http://docbook.org/xml/5.0/rng/docbook.rnc" \
+  "file:///usr/share/xml/docbook/schema/rng/5.0/docbook.rnc" \
+  /etc/xml/docbook-5.0 &&
+xmlcatalog --noout --add "uri" \
+  "http://www.oasis-open.org/docbook/xml/5.0/rnc/docbookxi.rnc" \
+  "file:///usr/share/xml/docbook/schema/rng/5.0/docbookxi.rnc" \
+  /etc/xml/docbook-5.0 &&
+xmlcatalog --noout --add "uri" \
+  "http://docbook.org/xml/5.0/rng/docbookxi.rnc" \
+  "file:///usr/share/xml/docbook/schema/rng/5.0/docbookxi.rnc" \
+  /etc/xml/docbook-5.0 &&
+
+xmlcatalog --noout --add "uri" \
+  "http://www.oasis-open.org/docbook/xml/5.0/xsd/docbook.xsd" \
+  "file:///usr/share/xml/docbook/schema/xsd/5.0/docbook.xsd" \
+  /etc/xml/docbook-5.0 &&
+xmlcatalog --noout --add "uri" \
+  "http://docbook.org/xml/5.0/xsd/docbook.xsd" \
+  "file:///usr/share/xml/docbook/schema/xsd/5.0/docbook.xsd" \
+  /etc/xml/docbook-5.0 &&
+xmlcatalog --noout --add "uri" \
+  "http://www.oasis-open.org/docbook/xml/5.0/xsd/docbookxi.xsd" \
+  "file:///usr/share/xml/docbook/schema/xsd/5.0/docbookxi.xsd" \
+  /etc/xml/docbook-5.0 &&
+xmlcatalog --noout --add "uri" \
+  "http://docbook.org/xml/5.0/xsd/docbookxi.xsd" \
+  "file:///usr/share/xml/docbook/schema/xsd/5.0/docbookxi.xsd" \
+  /etc/xml/docbook-5.0 &&
+xmlcatalog --noout --add "uri" \
+  "http://www.oasis-open.org/docbook/xml/5.0/xsd/xi.xsd" \
+  "file:///usr/share/xml/docbook/schema/xsd/5.0/xi.xsd" \
+  /etc/xml/docbook-5.0 &&
+xmlcatalog --noout --add "uri" \
+  "http://docbook.org/xml/5.0/xsd/xi.xsd" \
+  "file:///usr/share/xml/docbook/schema/xsd/5.0/xi.xsd" \
+  /etc/xml/docbook-5.0 &&
+xmlcatalog --noout --add "uri" \
+  "http://www.oasis-open.org/docbook/xml/5.0/xsd/xlink.xsd" \
+  "file:///usr/share/xml/docbook/schema/xsd/5.0/xlink.xsd" \
+  /etc/xml/docbook-5.0 &&
+xmlcatalog --noout --add "uri" \
+  "http://docbook.org/xml/5.0/xsd/xlink.xsd" \
+  "file:///usr/share/xml/docbook/schema/xsd/5.0/xlink.xsd" \
+  /etc/xml/docbook-5.0 &&
+xmlcatalog --noout --add "uri" \
+  "http://www.oasis-open.org/docbook/xml/5.0/xsd/xml.xsd" \
+  "file:///usr/share/xml/docbook/schema/xsd/5.0/xml.xsd" \
+  /etc/xml/docbook-5.0 &&
+xmlcatalog --noout --add "uri" \
+  "http://docbook.org/xml/5.0/xsd/xml.xsd" \
+  "file:///usr/share/xml/docbook/schema/xsd/5.0/xml.xsd" \
+  /etc/xml/docbook-5.0 &&
+
+xmlcatalog --noout --add "uri" \
+  "http://www.oasis-open.org/docbook/xml/5.0/sch/docbook.sch" \
+  "file:///usr/share/xml/docbook/schema/sch/5.0/docbook.sch" \
+  /etc/xml/docbook-5.0 &&
+xmlcatalog --noout --add "uri" \
+  "http://docbook.org/xml/5.0/sch/docbook.sch" \
+  "file:///usr/share/xml/docbook/schema/sch/5.0/docbook.sch" \
+  /etc/xml/docbook-5.0
+xmlcatalog --noout --create /usr/share/xml/docbook/schema/dtd/5.0/catalog.xml &&
+
+xmlcatalog --noout --add "public" \
+  "-//OASIS//DTD DocBook XML 5.0//EN" \
+  "docbook.dtd" /usr/share/xml/docbook/schema/dtd/5.0/catalog.xml &&
+xmlcatalog --noout --add "system" \
+  "http://www.oasis-open.org/docbook/xml/5.0/dtd/docbook.dtd" \
+  "docbook.dtd" /usr/share/xml/docbook/schema/dtd/5.0/catalog.xml &&
+
+xmlcatalog --noout --create /usr/share/xml/docbook/schema/rng/5.0/catalog.xml &&
+xmlcatalog --noout --add "uri" \
+  "http://docbook.org/xml/5.0/rng/docbook.rng" \
+  "docbook.rng" /usr/share/xml/docbook/schema/rng/5.0/catalog.xml &&
+xmlcatalog --noout --add "uri" \
+  "http://www.oasis-open.org/docbook/xml/5.0/rng/docbook.rng" \
+  "docbook.rng" /usr/share/xml/docbook/schema/rng/5.0/catalog.xml &&
+xmlcatalog --noout --add "uri" \
+  "http://docbook.org/xml/5.0/rng/docbookxi.rng" \
+  "docbookxi.rng" /usr/share/xml/docbook/schema/rng/5.0/catalog.xml &&
+xmlcatalog --noout --add "uri" \
+  "http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng" \
+  "docbookxi.rng" /usr/share/xml/docbook/schema/rng/5.0/catalog.xml &&
+xmlcatalog --noout --add "uri" \
+  "http://docbook.org/xml/5.0/rng/docbook.rnc" \
+  "docbook.rnc" /usr/share/xml/docbook/schema/rng/5.0/catalog.xml &&
+xmlcatalog --noout --add "uri" \
+  "http://www.oasis-open.org/docbook/xml/5.0/rng/docbook.rnc" \
+  "docbook.rnc" /usr/share/xml/docbook/schema/rng/5.0/catalog.xml &&
+xmlcatalog --noout --add "uri" \
+  "http://docbook.org/xml/5.0/rng/docbookxi.rnc" \
+  "docbookxi.rnc" /usr/share/xml/docbook/schema/rng/5.0/catalog.xml &&
+xmlcatalog --noout --add "uri" \
+  "http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rnc" \
+  "docbookxi.rnc" /usr/share/xml/docbook/schema/rng/5.0/catalog.xml &&
+
+xmlcatalog --noout --create /usr/share/xml/docbook/schema/sch/5.0/catalog.xml &&
+xmlcatalog --noout --add "uri" \
+  "http://docbook.org/xml/5.0/sch/docbook.sch" \
+  "docbook.sch" /usr/share/xml/docbook/schema/sch/5.0/catalog.xml &&
+xmlcatalog --noout --add "uri" \
+  "http://www.oasis-open.org/docbook/xml/5.0/sch/docbook.sch" \
+  "docbook.sch" /usr/share/xml/docbook/schema/sch/5.0/catalog.xml &&
+
+xmlcatalog --noout --create /usr/share/xml/docbook/schema/xsd/5.0/catalog.xml &&
+xmlcatalog --noout --add "uri" \
+  "http://docbook.org/xml/5.0/xsd/docbook.xsd" \
+  "docbook.xsd" /usr/share/xml/docbook/schema/xsd/5.0/catalog.xml &&
+xmlcatalog --noout --add "uri" \
+  "http://www.oasis-open.org/docbook/xml/5.0/xsd/docbook.xsd" \
+  "docbook.xsd" /usr/share/xml/docbook/schema/xsd/5.0/catalog.xml &&
+xmlcatalog --noout --add "uri" \
+  "http://docbook.org/xml/5.0/xsd/docbookxi.xsd" \
+  "docbookxi.xsd" /usr/share/xml/docbook/schema/xsd/5.0/catalog.xml &&
+xmlcatalog --noout --add "uri" \
+  "http://www.oasis-open.org/docbook/xml/5.0/xsd/docbookxi.xsd" \
+  "docbookxi.xsd" /usr/share/xml/docbook/schema/xsd/5.0/catalog.xml &&
+xmlcatalog --noout --add "uri" \
+  "http://docbook.org/xml/5.0/xsd/xlink.xsd" \
+  "xlink.xsd" /usr/share/xml/docbook/schema/xsd/5.0/catalog.xml &&
+xmlcatalog --noout --add "uri" \
+   "http://www.oasis-open.org/docbook/xml/5.0/xsd/xlink.xsd" \
+   "xlink.xsd" /usr/share/xml/docbook/schema/xsd/5.0/catalog.xml &&
+xmlcatalog --noout --add "uri" \
+   "http://docbook.org/xml/5.0/xsd/xml.xsd" \
+   "xml.xsd" /usr/share/xml/docbook/schema/xsd/5.0/catalog.xml &&
+xmlcatalog --noout --add "uri" \
+   "http://www.oasis-open.org/docbook/xml/5.0/xsd/xml.xsd" \
+   "xml.xsd" /usr/share/xml/docbook/schema/xsd/5.0/catalog.xml
+if [ ! -e /etc/xml/catalog ]; then
+    xmlcatalog --noout --create /etc/xml/catalog
+fi &&
+xmlcatalog --noout --add "delegatePublic" \
+  "-//OASIS//DTD DocBook XML 5.0//EN" \
+  "file:///usr/share/xml/docbook/schema/dtd/5.0/catalog.xml" \
+  /etc/xml/catalog &&
+xmlcatalog --noout --add "delegateSystem" \
+  "http://docbook.org/xml/5.0/dtd/" \
+  "file:///usr/share/xml/docbook/schema/dtd/5.0/catalog.xml" \
+  /etc/xml/catalog &&
+xmlcatalog --noout --add "delegateURI" \
+  "http://docbook.org/xml/5.0/dtd/" \
+  "file:///usr/share/xml/docbook/schema/dtd/5.0/catalog.xml" \
+  /etc/xml/catalog &&
+xmlcatalog --noout --add "delegateURI" \
+  "http://docbook.org/xml/5.0/rng/"  \
+  "file:///usr/share/xml/docbook/schema/rng/5.0/catalog.xml" \
+  /etc/xml/catalog &&
+xmlcatalog --noout --add "delegateURI" \
+  "http://docbook.org/xml/5.0/sch/"  \
+  "file:///usr/share/xml/docbook/schema/sch/5.0/catalog.xml" \
+  /etc/xml/catalog &&
+xmlcatalog --noout --add "delegateURI" \
+  "http://docbook.org/xml/5.0/xsd/"  \
+  "file:///usr/share/xml/docbook/schema/xsd/5.0/catalog.xml" \
+  /etc/xml/catalog
+cd /sources
+rm -Rf docbook
+#
+## git
+tar -xvf git-2.41.0.tar.xz
+cd git-2.41.0
+./configure --prefix=/usr --with-gitconfig=/etc/gitconfig --with-python=python3
+make
+make perllibdir=/usr/lib/perl5/5.38/site_perl install
+cd /sources
+rm -Rf git-2.41.0
 
 #
 #end program builds

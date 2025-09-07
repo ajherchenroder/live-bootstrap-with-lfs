@@ -104,6 +104,13 @@ if test "$REMOTE" = "local"; then
    curl http://192.168.2.102/LFS/unzip60.tar.gz -O -L
    curl http://192.168.2.102/LFS/unzip-6.0-consolidated_fixes-1.patch -O -L
    curl http://192.168.2.102/LFS/cpio-2.14.tar.bz2 -O -L
+   curl http://192.168.2.102/LFS/git-2.41.0.tar.xz -O -L
+   curl http://192.168.2.102/LFS/docbook-5.0.zip -O -L
+   curl http://192.168.2.102/LFS/libarchive-3.7.1.tar.xz -O -L
+   curl http://192.168.2.102/LFS/nettle-3.9.1.tar.gz -O -L
+   curl http://192.168.2.102/LFS/lzo-2.10.tar.gz -O -L
+   curl http://192.168.2.102/LFS/sgml-common-0.6.3.tgz -O -L
+   curl http://192.168.2.102/LFS/sgml-common-0.6.3-manpage-1.patch -O -L
 else
    echo "remote"
    curl http://ftp.lfs-matrix.net/pub/lfs/lfs-packages/lfs-packages-12.0.tar -O -l
@@ -152,6 +159,13 @@ else
    curl https://downloads.sourceforge.net/infozip/unzip60.tar.gz -O -L
    curl https://www.linuxfromscratch.org/patches/blfs/12.0/unzip-6.0-consolidated_fixes-1.patch -O -L
    curl https://ftp.gnu.org/gnu/cpio/cpio-2.14.tar.bz2 -O -L
+   curl https://www.kernel.org/pub/software/scm/git/git-2.41.0.tar.xz -O -L
+   curl https://docbook.org/xml/5.0/docbook-5.0.zip -O -L 
+   curl https://github.com/libarchive/libarchive/releases/download/v3.7.1/libarchive-3.7.1.tar.xz -O -L
+   curl https://ftp.gnu.org/gnu/nettle/nettle-3.9.1.tar.gz -O -L
+   curl https://www.oberhumer.com/opensource/lzo/download/lzo-2.10.tar.gz -O -L
+   curl https://sourceware.org/ftp/docbook-tools/new-trials/SOURCES/sgml-common-0.6.3.tgz -O -L
+   curl https://www.linuxfromscratch.org/patches/blfs/12.0/sgml-common-0.6.3-manpage-1.patch -O -L 
 fi
 
 #to do: add in any additional BLFS packages desired. 
