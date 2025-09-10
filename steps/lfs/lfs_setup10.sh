@@ -181,13 +181,13 @@ cd /sources
 rm -Rf sqlite-autoconf-3420000
 #
 ## make-ca
-tar -xvf make-ca-1.13.tar.xz
-cd make-ca-1.13
+tar -xvf make-ca-1.16.1.tar.xz
+cd make-ca-1.16.1
 make install
 install -vdm755 /etc/ssl/local
 #/usr/sbin/make-ca -g
 cd /sources
-rm -Rf make-ca-1.13
+rm -Rf make-ca-1.16.1
 #
 ## wget
 tar -xvf wget-1.21.4.tar.gz
