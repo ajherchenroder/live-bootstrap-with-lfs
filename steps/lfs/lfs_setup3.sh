@@ -141,9 +141,9 @@ echo "INPUT(-lncursesw)" > $LFS/usr/lib/libncurses.so
 cd $LFS/sources
 rm -Rf ncurses-6.4
 #
-##bash
-tar -xvf bash-5.2.15.tar.gz
-cd bash-5.2.15
+##b
+tar -xvf bash-5.3.tar.gz
+cd bash-5.3
 ./configure --prefix=/usr                      \
             --build=$(sh support/config.guess) \
             --host=$LFS_TGT                    \
@@ -152,7 +152,7 @@ make
 make DESTDIR=$LFS install
 ln -sv bash $LFS/bin/sh
 cd $LFS/sources
-rm -Rf bash-5.2.15
+rm -Rf bash-5.3
 #
 ##coreutils
 tar -xvf coreutils-9.3.tar.xz

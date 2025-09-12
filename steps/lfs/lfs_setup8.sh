@@ -148,9 +148,9 @@ cd /sources
 rm -Rf grep-3.11
 #
 ##bash
-tar -xvf bash-5.2.15.tar.gz
-cd bash-5.2.15
-./configure --prefix=/usr --without-bash-malloc --with-installed-readline --docdir=/usr/share/doc/bash-5.2.15
+tar -xvf bash-5.3.tar.gz
+cd bash-5.3
+./configure --prefix=/usr --without-bash-malloc --with-installed-readline --docdir=/usr/share/doc/bash-5.3
 make
 #chown -Rv tester . 
 #su -s /usr/bin/expect tester << EOF
@@ -163,7 +163,7 @@ make
 make install
 #exec /usr/bin/bash --login
 cd /sources
-rm -Rf bash-5.2.15
+rm -Rf bash-5.3
 #
 ##libtool
 tar -xvf libtool-2.4.7.tar.xz
