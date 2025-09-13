@@ -144,10 +144,15 @@ rm -Rf ncurses-6.4
 ##b
 tar -xvf bash-5.3.tar.gz
 cd bash-5.3
-./configure --prefix=/usr                      \
+./configure  --prefix=/usr                      \
             --build=$(sh support/config.guess) \
             --host=$LFS_TGT                    \
             --without-bash-malloc
+sed -i 's/CFLAGS = -g -O2/CFLAGS = -g -O2 -std=gnu17/' Makefile
+sed -i 's/CFLAGS_FOR_BUILD = -g -DCROSS_COMPILING/CFLAGS_FOR_BUILD = -g -DCROSS_COMPILING -std=gnu17/' Makefile
+sed -i 's/CFLAGS = -g -O2/CFLAGS = -g -O2 -std=gnu17/' builtins/Makefile
+sed -i 's/CFLAGS_FOR_BUILD = -g -DCROSS_COMPILING/CFLAGS_FOR_BUILD = -g -DCROSS_COMPILING -std=gnu17/' builtins/Makefile
+
 make
 make DESTDIR=$LFS install
 ln -sv bash $LFS/bin/sh
