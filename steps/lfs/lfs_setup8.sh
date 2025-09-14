@@ -149,7 +149,7 @@ rm -Rf grep-3.11
 #
 ##bash
 tar -xvf bash-5.2.15.tar.gz
-cd bash-5.3
+cd bash-5.2.15
 ./configure --prefix=/usr --without-bash-malloc --with-installed-readline --docdir=/usr/share/doc/bash-5.2.15
 make
 #chown -Rv tester . 
