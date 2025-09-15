@@ -470,6 +470,7 @@ rm -Rf libarchive-3.7.1
 mkdir docbook
 cd docbook
 unzip ../docbook-5.0.zip
+cd docbook-5.0
 install -vdm755 /usr/share/xml/docbook/schema/{dtd,rng,sch,xsd}/5.0 
 install -vm644  dtd/* /usr/share/xml/docbook/schema/dtd/5.0         
 install -vm644  rng/* /usr/share/xml/docbook/schema/rng/5.0         
