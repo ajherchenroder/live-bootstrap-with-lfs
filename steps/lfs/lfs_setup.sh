@@ -83,7 +83,7 @@ if test "$REMOTE" = "local"; then
    curl http://192.168.2.102/LFS/llvm-16.0.5.src.tar.xz -O
    curl http://192.168.2.102/LFS/llvm-cmake.src.tar.xz -O
    curl http://192.168.2.102/LFS/llvm-third-party.src.tar.xz -O
-   curl http://192.168.2.102/LFS/clang-16.0.5.src.tar.xz -O
+   curl http://192.168.2.102/LFS/clang-1sudo-1.9.14p3.tar.gz6.0.5.src.tar.xz -O
    curl http://192.168.2.102/LFS/clang-16.0.5-enable_default_ssp-1.patch -O
    curl http://192.168.2.102/LFS/compiler-rt-16.0.5.src.tar.xz -O
    curl http://192.168.2.102/LFS/which-2.21.tar.gz -O
@@ -112,6 +112,7 @@ if test "$REMOTE" = "local"; then
    curl http://192.168.2.102/LFS/sgml-common-0.6.3.tgz -O -L
    curl http://192.168.2.102/LFS/sgml-common-0.6.3-manpage-1.patch -O -L
    curl http://192.168.2.102/LFS/bash-5.3.tar.gz -O -L
+   curl http://192.168.2.102/LFS/sudo-1.9.14p3.tar.gz
 else
    echo "remote"
    curl http://ftp.lfs-matrix.net/pub/lfs/lfs-packages/lfs-packages-12.0.tar -O -l
@@ -167,7 +168,8 @@ else
    curl https://www.oberhumer.com/opensource/lzo/download/lzo-2.10.tar.gz -O -L
    curl https://sourceware.org/ftp/docbook-tools/new-trials/SOURCES/sgml-common-0.6.3.tgz -O -L
    curl https://www.linuxfromscratch.org/patches/blfs/12.0/sgml-common-0.6.3-manpage-1.patch -O -L 
-   curl https://ftp.gnu.org/gnu/bash/bash-5.3.tar.gz -O -L 
+   curl https://ftp.gnu.org/gnu/bash/bash-5.3.tar.gz -O -L
+   curl https://www.sudo.ws/dist/sudo-1.9.14p3.tar.gz -O -L
 fi
 
 #to do: add in any additional BLFS packages desired. 
