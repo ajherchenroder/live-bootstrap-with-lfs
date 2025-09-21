@@ -112,7 +112,7 @@ if test "$REMOTE" = "local"; then
    curl http://192.168.2.102/LFS/sgml-common-0.6.3.tgz -O -L
    curl http://192.168.2.102/LFS/sgml-common-0.6.3-manpage-1.patch -O -L
    curl http://192.168.2.102/LFS/bash-5.3.tar.gz -O -L
-   curl http://192.168.2.102/LFS/sudo-1.9.14p3.tar.gz
+   curl http://192.168.2.102/LFS/sudo-1.9.14p3.tar.gz -O -L
 else
    echo "remote"
    curl http://ftp.lfs-matrix.net/pub/lfs/lfs-packages/lfs-packages-12.0.tar -O -l
