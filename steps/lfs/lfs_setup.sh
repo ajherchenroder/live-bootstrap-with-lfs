@@ -83,7 +83,7 @@ if test "$REMOTE" = "local"; then
    curl http://192.168.2.102/LFS/llvm-16.0.5.src.tar.xz -O
    curl http://192.168.2.102/LFS/llvm-cmake.src.tar.xz -O
    curl http://192.168.2.102/LFS/llvm-third-party.src.tar.xz -O
-   curl http://192.168.2.102/LFS/clang-1sudo-1.9.14p3.tar.gz6.0.5.src.tar.xz -O
+   curl http://192.168.2.102/LFS/clang-16.0.5.src.tar.xz -O -L
    curl http://192.168.2.102/LFS/clang-16.0.5-enable_default_ssp-1.patch -O
    curl http://192.168.2.102/LFS/compiler-rt-16.0.5.src.tar.xz -O
    curl http://192.168.2.102/LFS/which-2.21.tar.gz -O
