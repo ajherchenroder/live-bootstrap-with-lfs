@@ -634,6 +634,21 @@ cat > /etc/sudoers.d/00-sudo << "EOF"
 Defaults secure_path="/usr/sbin:/usr/bin"
 %wheel ALL=(ALL) ALL
 EOF
+#
+##libxslt
+tar -xvf libxslt-1.1.38.tar.xz
+cd libxslt-1.1.38
+./configure --prefix=/usr                          \
+            --disable-static                       \
+            --docdir=/usr/share/doc/libxslt-1.1.38 \
+            PYTHON=/usr/bin/python3
+make
+make install 
+rm -Rf 
+cd /sources
+rm -Rf libxslt-1.1.38
+
+
 
 #
 #end program builds

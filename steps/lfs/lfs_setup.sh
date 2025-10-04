@@ -113,6 +113,7 @@ if test "$REMOTE" = "local"; then
    curl http://192.168.2.102/LFS/sgml-common-0.6.3-manpage-1.patch -O -L
    curl http://192.168.2.102/LFS/bash-5.3.tar.gz -O -L
    curl http://192.168.2.102/LFS/sudo-1.9.14p3.tar.gz -O -L
+   curl http://192.168.2.102/LFS/libxslt-1.1.38.tar.xz -O -L
 else
    echo "remote"
    curl http://ftp.lfs-matrix.net/pub/lfs/lfs-packages/lfs-packages-12.0.tar -O -l
@@ -170,6 +171,7 @@ else
    curl https://www.linuxfromscratch.org/patches/blfs/12.0/sgml-common-0.6.3-manpage-1.patch -O -L 
    curl https://ftp.gnu.org/gnu/bash/bash-5.3.tar.gz -O -L
    curl https://www.sudo.ws/dist/sudo-1.9.14p3.tar.gz -O -L
+   curl https://download.gnome.org/sources/libxslt/1.1/libxslt-1.1.38.tar.xz -O -L
 fi
 
 #to do: add in any additional BLFS packages desired. 
