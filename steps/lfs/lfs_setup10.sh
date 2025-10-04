@@ -634,6 +634,8 @@ cat > /etc/sudoers.d/00-sudo << "EOF"
 Defaults secure_path="/usr/sbin:/usr/bin"
 %wheel ALL=(ALL) ALL
 EOF
+cd /sources
+rm -Rf sudo-1.9.14p3
 #
 ##libxslt
 tar -xvf libxslt-1.1.38.tar.xz
