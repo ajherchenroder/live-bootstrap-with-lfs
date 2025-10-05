@@ -646,10 +646,29 @@ cd libxslt-1.1.38
             PYTHON=/usr/bin/python3
 make
 make install 
-rm -Rf 
 cd /sources
 rm -Rf libxslt-1.1.38
+#
+## docbook-xml-dtd
+mkdir docbookdtd
+cd docbookdtd
+unzip ../docbook-4.5.zip
+cd docbook-4.5
+sed -i -e '/ISO 8879/d' \
+       -e '/gml/d' docbook.cat
+install -v -d /usr/share/sgml/docbook/sgml-dtd-4.5 &&
+chown -R root:root . &&
 
+install -v docbook.cat /usr/share/sgml/docbook/sgml-dtd-4.5/catalog &&
+cp -v -af *.dtd *.mod *.dcl /usr/share/sgml/docbook/sgml-dtd-4.5 &&
+
+install-catalog --add /etc/sgml/sgml-docbook-dtd-4.5.cat \
+    /usr/share/sgml/docbook/sgml-dtd-4.5/catalog &&
+
+install-catalog --add /etc/sgml/sgml-docbook-dtd-4.5.cat \
+    /etc/sgml/sgml-docbook.cat
+cd /sources
+rm -Rf docbookdtd
 
 
 #
