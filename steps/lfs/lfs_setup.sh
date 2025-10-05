@@ -42,6 +42,8 @@ export LFS=/mnt/lfs
 if ! test -d $LFS/sources 
 then 
     mkdir -v $LFS/sources
+else
+    rm -Rf $LFS/sources
 fi
 echo $LFS
 chmod -v a+wt $LFS/sources

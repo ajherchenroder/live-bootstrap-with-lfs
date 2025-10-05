@@ -653,7 +653,6 @@ rm -Rf libxslt-1.1.38
 mkdir docbookdtd
 cd docbookdtd
 unzip ../docbook-4.5.zip
-cd docbook-4.5
 sed -i -e '/ISO 8879/d' \
        -e '/gml/d' docbook.cat
 install -v -d /usr/share/sgml/docbook/sgml-dtd-4.5 &&
