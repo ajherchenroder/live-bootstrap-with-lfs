@@ -78,6 +78,11 @@ _grep() {
     fi
 }
 
+# Useful for perl extensions
+get_perl_version() {
+    perl -v | sed -n -re 's/.*[ (]v([0-9\.]*)[ )].*/\1/p'
+}
+
 get_revision() {
     local pkg=$1
     local oldpwd="${PWD}"
@@ -96,7 +101,7 @@ bin_preseed() {
         test -e "${pkg}_${revision}.tar.bz2" || return 1
         if [ "${UPDATE_CHECKSUMS}" = "True" ] || src_checksum "${pkg}" $((revision)); then
             echo "${pkg}: installing prebuilt package."
-            mv "${pkg}_${revision}"* /external/repo || return 1
+            mv "${pkg}_${revision}.tar.bz2" /external/repo || return 1
             cd "/external/repo"
             rm -f /tmp/filelist.txt
             src_apply "${pkg}" $((revision))
@@ -273,14 +278,9 @@ randomize() {
 }
 
 download_source_line() {
-    if [[ "${1}" == git://* ]]; then
-        shift
-    fi
     upstream_url="${1}"
     checksum="${2}"
     fname="${3}"
-    # Default to basename of url if not given
-    fname="${fname:-$(basename "${upstream_url}")}"
     if ! [ -e "${fname}" ]; then
         for mirror in $(randomize "${MIRRORS}"); do
             # In qemu SimpleMirror is not running on the guest os, use qemu IP
@@ -298,14 +298,9 @@ download_source_line() {
 }
 
 check_source_line() {
-    if [[ "${1}" == git://* ]]; then
-        shift
-    fi
     url="${1}"
     checksum="${2}"
     fname="${3}"
-    # Default to basename of url if not given
-    fname="${fname:-$(basename "${url}")}"
     if ! [ -e "${fname}" ]; then
         echo "${fname} does not exist!"
         false
@@ -313,6 +308,24 @@ check_source_line() {
     echo "${checksum}  ${fname}" > "${fname}.sum"
     sha256sum -c "${fname}.sum"
     rm "${fname}.sum"
+}
+
+source_line_action() {
+    action="$1"
+    shift
+    type="$1"
+    shift
+    case $type in
+        "g" | "git")
+            shift
+            ;;
+    esac
+    url="${1}"
+    checksum="${2}"
+    fname="${3}"
+    # Default to basename of url if not given
+    fname="${fname:-$(basename "${url}")}"
+    $action "$url" "$checksum" "$fname"
 }
 
 # Default get function that downloads source tarballs.
@@ -323,22 +336,19 @@ default_src_get() {
     while read line; do
         # This is intentional - we want to split out ${line} into separate arguments.
         # shellcheck disable=SC2086
-        download_source_line ${line}
+        source_line_action download_source_line ${line}
     done < "${base_dir}/sources"
     # shellcheck disable=SC2162
     while read line; do
         # This is intentional - we want to split out ${line} into separate arguments.
         # shellcheck disable=SC2086
-        check_source_line ${line}
+        source_line_action check_source_line ${line}
     done < "${base_dir}/sources"
     cd -
 }
 
 # Intelligently extracts a file based upon its filetype.
 extract_file() {
-    if [[ "${1}" == git://* ]]; then
-        shift
-    fi
     f="${3:-$(basename "${1}")}"
     # shellcheck disable=SC2154
     case "${noextract}" in
@@ -384,7 +394,7 @@ default_src_unpack() {
     first_line=$(head -n 1 ../sources)
     # Again, we want to split out into words.
     # shellcheck disable=SC2086
-    extract_file ${first_line}
+    source_line_action extract_file ${first_line}
     # This assumes there is only one directory in the tarball
     # Get the dirname "smartly"
     if ! [ -e "${dirname}" ]; then
@@ -398,7 +408,7 @@ default_src_unpack() {
     # shellcheck disable=SC2162
     tail -n +2 ../sources | while read line; do
         # shellcheck disable=SC2086
-        extract_file ${line}
+        source_line_action extract_file ${line}
     done
 }
 
@@ -442,6 +452,21 @@ default_src_install() {
     make -f Makefile install PREFIX="${PREFIX}" DESTDIR="${DESTDIR}"
 }
 
+# Helper function for permissions
+_do_strip() {
+    # shellcheck disable=SC2124
+    local f="${@: -1}"
+    if ! [ -w "${f}" ]; then
+        local perms
+        perms="$(stat -c %a "${f}")"
+        chmod u+w "${f}"
+    fi
+    strip "$@"
+    if [ -n "${perms}" ]; then
+        chmod "${perms}" "${f}"
+    fi
+}
+
 # Default function for postprocessing binaries.
 default_src_postprocess() {
     if (command -v find && command -v file && command -v strip) >/dev/null 2>&1; then
@@ -449,15 +474,15 @@ default_src_postprocess() {
         # shellcheck disable=SC2162
         find "${DESTDIR}" -type f | while read f; do
             case "$(file -bi "${f}")" in
-                application/x-executable*) strip "${f}" ;;
+                application/x-executable*) _do_strip "${f}" ;;
                 application/x-sharedlib*|application/x-pie-executable*)
                     machine_set="$(file -b "${f}")"
                     case "${machine_set}" in
                         *no\ machine*) ;; # don't strip ELF container-only
-                        *) strip --strip-unneeded "${f}" ;;
+                        *) _do_strip --strip-unneeded "${f}" ;;
                     esac
                     ;;
-                application/x-archive*) strip --strip-debug "${f}" ;;
+                application/x-archive*) _do_strip --strip-debug "${f}" ;;
             esac
         done
     fi
@@ -505,7 +530,7 @@ src_checksum() {
     if ! [ "$UPDATE_CHECKSUMS" = True ] ; then
         # We avoid using pipes as that is not supported by initial sha256sum from mescc-tools-extra
         local checksum_file=/tmp/checksum
-        _grep "${pkg}_${revision}" "${SRCDIR}/SHA256SUMS.pkgs" > "${checksum_file}" || true
+        _grep "${pkg}_${revision}.tar.bz2" "${SRCDIR}/SHA256SUMS.pkgs" > "${checksum_file}" || true
         # Check there is something in checksum_file
         if ! [ -s "${checksum_file}" ]; then
             echo "${pkg}: no checksum stored!"
