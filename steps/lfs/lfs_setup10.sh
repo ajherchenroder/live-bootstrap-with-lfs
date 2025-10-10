@@ -650,8 +650,8 @@ cd /sources
 rm -Rf libxslt-1.1.38
 #
 ### docbook-sml-dtd
-#mkdir docbookdtd
-#cd docbookdtd
+mkdir docbookdtd
+cd docbookdtd
 unzip ../docbook-4.5.zip
 sed -i -e '/ISO 8879/d' \
        -e '/gml/d' docbook.cat
