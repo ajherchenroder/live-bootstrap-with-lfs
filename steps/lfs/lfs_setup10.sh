@@ -649,9 +649,9 @@ make install
 cd /sources
 rm -Rf libxslt-1.1.38
 #
-## docbook-xml-dtd
-mkdir docbookdtd
-cd docbookdtd
+### docbook-sml-dtd
+#mkdir docbookdtd
+#cd docbookdtd
 unzip ../docbook-4.5.zip
 sed -i -e '/ISO 8879/d' \
        -e '/gml/d' docbook.cat
@@ -668,6 +668,139 @@ install-catalog --add /etc/sgml/sgml-docbook-dtd-4.5.cat \
     /etc/sgml/sgml-docbook.cat
 cd /sources
 rm -Rf docbookdtd
+#
+## docbook-xml-4.5 
+mkdir docbookxml
+cd docbookxml
+unzip ../docbook-xml-4.5.zip
+install -v -d -m755 /usr/share/xml/docbook/xml-dtd-4.5 &&
+install -v -d -m755 /etc/xml &&
+cp -v -af --no-preserve=ownership docbook.cat *.dtd ent/ *.mod \
+    /usr/share/xml/docbook/xml-dtd-4.5
+if [ ! -e /etc/xml/docbook ]; then
+    xmlcatalog --noout --create /etc/xml/docbook
+fi &&
+xmlcatalog --noout --add "public" \
+    "-//OASIS//DTD DocBook XML V4.5//EN" \
+    "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" \
+    /etc/xml/docbook &&
+xmlcatalog --noout --add "public" \
+    "-//OASIS//DTD DocBook XML CALS Table Model V4.5//EN" \
+    "file:///usr/share/xml/docbook/xml-dtd-4.5/calstblx.dtd" \
+    /etc/xml/docbook &&
+xmlcatalog --noout --add "public" \
+    "-//OASIS//DTD XML Exchange Table Model 19990315//EN" \
+    "file:///usr/share/xml/docbook/xml-dtd-4.5/soextblx.dtd" \
+    /etc/xml/docbook &&
+xmlcatalog --noout --add "public" \
+    "-//OASIS//ELEMENTS DocBook XML Information Pool V4.5//EN" \
+    "file:///usr/share/xml/docbook/xml-dtd-4.5/dbpoolx.mod" \
+    /etc/xml/docbook &&
+xmlcatalog --noout --add "public" \
+    "-//OASIS//ELEMENTS DocBook XML Document Hierarchy V4.5//EN" \
+    "file:///usr/share/xml/docbook/xml-dtd-4.5/dbhierx.mod" \
+    /etc/xml/docbook &&
+xmlcatalog --noout --add "public" \
+    "-//OASIS//ELEMENTS DocBook XML HTML Tables V4.5//EN" \
+    "file:///usr/share/xml/docbook/xml-dtd-4.5/htmltblx.mod" \
+    /etc/xml/docbook &&
+xmlcatalog --noout --add "public" \
+    "-//OASIS//ENTITIES DocBook XML Notations V4.5//EN" \
+     "file:///usr/share/xml/docbook/xml-dtd-4.5/dbnotnx.mod" \
+    /etc/xml/docbook &&
+xmlcatalog --noout --add "public" \
+    "-//OASIS//ENTITIES DocBook XML Character Entities V4.5//EN" \
+    "file:///usr/share/xml/docbook/xml-dtd-4.5/dbcentx.mod" \
+    /etc/xml/docbook &&
+xmlcatalog --noout --add "public" \
+    "-//OASIS//ENTITIES DocBook XML Additional General Entities V4.5//EN" \
+    "file:///usr/share/xml/docbook/xml-dtd-4.5/dbgenent.mod" \
+    /etc/xml/docbook &&
+xmlcatalog --noout --add "rewriteSystem" \
+    "http://www.oasis-open.org/docbook/xml/4.5" \
+    "file:///usr/share/xml/docbook/xml-dtd-4.5" \
+    /etc/xml/docbook &&
+xmlcatalog --noout --add "rewriteURI" \
+    "http://www.oasis-open.org/docbook/xml/4.5" \
+    "file:///usr/share/xml/docbook/xml-dtd-4.5" \
+    /etc/xml/docbook
+if [ ! -e /etc/xml/catalog ]; then
+    xmlcatalog --noout --create /etc/xml/catalog
+fi &&
+xmlcatalog --noout --add "delegatePublic" \
+    "-//OASIS//ENTITIES DocBook XML" \
+    "file:///etc/xml/docbook" \
+    /etc/xml/catalog &&
+xmlcatalog --noout --add "delegatePublic" \
+    "-//OASIS//DTD DocBook XML" \
+    "file:///etc/xml/docbook" \
+    /etc/xml/catalog &&
+xmlcatalog --noout --add "delegateSystem" \
+    "http://www.oasis-open.org/docbook/" \
+    "file:///etc/xml/docbook" \
+    /etc/xml/catalog &&
+xmlcatalog --noout --add "delegateURI" \
+    "http://www.oasis-open.org/docbook/" \
+    "file:///etc/xml/docbook" \
+    /etc/xml/catalog
+cd /sources
+rm -Rf docbookxml
+#
+##docbook-xsl-nons
+tar -xvf docbook-xsl-nons-1.79.2.tar.bz2
+cd docbook-xsl-nons-1.79.2
+patch -Np1 -i ../docbook-xsl-nons-1.79.2-stack_fix-1.patch
+install -v -m755 -d /usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2 &&
+
+cp -v -R VERSION assembly common eclipse epub epub3 extensions fo        \
+         highlighting html htmlhelp images javahelp lib manpages params  \
+         profiling roundtrip slides template tests tools webhelp website \
+         xhtml xhtml-1_1 xhtml5                                          \
+    /usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2 &&
+
+ln -s VERSION /usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2/VERSION.xsl &&
+
+install -v -m644 -D README \
+                    /usr/share/doc/docbook-xsl-nons-1.79.2/README.txt &&
+install -v -m644    RELEASE-NOTES* NEWS* \
+                    /usr/share/doc/docbook-xsl-nons-1.79.2
+if [ ! -d /etc/xml ]; then install -v -m755 -d /etc/xml; fi &&
+if [ ! -f /etc/xml/catalog ]; then
+    xmlcatalog --noout --create /etc/xml/catalog
+fi &&
+
+xmlcatalog --noout --add "rewriteSystem" \
+           "https://cdn.docbook.org/release/xsl-nons/1.79.2" \
+           "/usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2" \
+    /etc/xml/catalog &&
+
+xmlcatalog --noout --add "rewriteURI" \
+           "https://cdn.docbook.org/release/xsl-nons/1.79.2" \
+           "/usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2" \
+    /etc/xml/catalog &&
+
+xmlcatalog --noout --add "rewriteSystem" \
+           "https://cdn.docbook.org/release/xsl-nons/current" \
+           "/usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2" \
+    /etc/xml/catalog &&
+
+xmlcatalog --noout --add "rewriteURI" \
+           "https://cdn.docbook.org/release/xsl-nons/current" \
+           "/usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2" \
+    /etc/xml/catalog &&
+
+xmlcatalog --noout --add "rewriteSystem" \
+           "http://docbook.sourceforge.net/release/xsl/current" \
+           "/usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2" \
+    /etc/xml/catalog &&
+
+xmlcatalog --noout --add "rewriteURI" \
+           "http://docbook.sourceforge.net/release/xsl/current" \
+           "/usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2" \
+    /etc/xml/catalog
+cd /sources
+rm -Rf docbook-xsl-nons-1.79.2
+
 
 
 #

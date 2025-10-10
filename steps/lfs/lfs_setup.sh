@@ -117,6 +117,9 @@ if test "$REMOTE" = "local"; then
    curl http://192.168.2.102/LFS/sudo-1.9.14p3.tar.gz -O -L
    curl http://192.168.2.102/LFS/libxslt-1.1.38.tar.xz -O -L
    curl http://192.168.2.102/LFS/docbook-4.5.zip -O -L
+   curl http://192.168.2.102/LFS/docbook-xsl-nons-1.79.2.tar.bz2 -O -L
+   curl http://192.168.2.102/LFS/docbook-xsl-nons-1.79.2-stack_fix-1.patch -O -L 
+   curl http://192.168.2.102/LFS/docbook-xml-4.5.zip -O -L
 else
    echo "remote"
    curl http://ftp.lfs-matrix.net/pub/lfs/lfs-packages/lfs-packages-12.0.tar -O -l
@@ -176,6 +179,10 @@ else
    curl https://www.sudo.ws/dist/sudo-1.9.14p3.tar.gz -O -L
    curl https://download.gnome.org/sources/libxslt/1.1/libxslt-1.1.38.tar.xz -O -L
    curl https://www.docbook.org/sgml/4.5/docbook-4.5.zip -O -L
+   curl https://github.com/docbook/xslt10-stylesheets/releases/download/release/1.79.2/docbook-xsl-nons-1.79.2.tar.bz2 -O -L
+   curl https://www.linuxfromscratch.org/patches/blfs/12.0/docbook-xsl-nons-1.79.2-stack_fix-1.patch -O -L 
+   curl https://www.docbook.org/xml/4.5/docbook-xml-4.5.zip -O -L
+ 
 fi
 
 #to do: add in any additional BLFS packages desired. 
